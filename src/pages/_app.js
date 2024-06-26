@@ -1,5 +1,10 @@
-import "@/styles/globals.css";
+import '@/styles/globals.css';
+import useServiceWorker from '../hooks/useServiceWorker';
 
-export default function App({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
+  useServiceWorker();
+
   return <Component {...pageProps} />;
 }
+
+export default MyApp;
