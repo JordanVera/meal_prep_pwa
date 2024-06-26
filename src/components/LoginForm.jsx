@@ -13,7 +13,7 @@ const LoginForm = () => {
     setError('');
 
     const result = await signIn('credentials', {
-      redirect: false,
+      redirect: '/recipes',
       email,
       password,
     });
