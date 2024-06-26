@@ -4,7 +4,7 @@
   "description": "My awesome Next.js PWA!",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#00000050",
   "theme_color": "#000000",
   "icons": [
     {
