@@ -5,11 +5,5 @@ import Sidebar from '@/components/Sidebar';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  return (
-    <main className={`flex`}>
-      <Sidebar />
-
-      <div className="w-full min-h-screen bg-zinc-900">yessirskiiii</div>
-    </main>
-  );
+  return <div className="bg-zinc-900">yessirski</div>;
 }

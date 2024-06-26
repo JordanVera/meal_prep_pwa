@@ -7,7 +7,7 @@ const Sidebar = () => {
   const [searchText, setSearchText] = useState('');
 
   return (
-    <aside className="bg-zinc-800 w-[300px] min-h-screen p-5">
+    <aside className="bg-zinc-800 w-[300px] min-h-screen p-3">
       <div className="relative">
         <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-zinc-600 h-5 w-5" />
         <input
@@ -19,12 +19,12 @@ const Sidebar = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <h2 className="text-white text-xs font-bold mt-5">Library</h2>
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-col">
+        <h2 className="text-zinc-500 text-xs font-bold mt-5">Library</h2>
+        <div className="flex flex-col">
           <Link
-            href={`/`}
-            className="text-white text-sm flex gap-3 items-center"
+            href={`/mealPlan`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Image
               height={10}
@@ -35,8 +35,8 @@ const Sidebar = () => {
             Meal Plan
           </Link>
           <Link
-            href={`/`}
-            className="text-white text-sm flex gap-3 items-center"
+            href={`/recipes`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Image
               height={10}
@@ -47,8 +47,8 @@ const Sidebar = () => {
             Recipes
           </Link>
           <Link
-            href={`/`}
-            className="text-white text-sm flex gap-3 items-center"
+            href={`/groceries`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Image
               height={10}
@@ -59,10 +59,10 @@ const Sidebar = () => {
             Groceries
           </Link>
           <Link
-            href={`/`}
-            className="text-white text-sm flex gap-3 items-center"
+            href={`/discover`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
-            <Brain className="text-purple-600" />
+            <Brain className="text-purple-600 h-6 w-6" />
             Discover
           </Link>
         </div>
