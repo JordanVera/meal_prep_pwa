@@ -20,7 +20,7 @@ const Sidebar = () => {
       </div>
 
       <div className="flex flex-col">
-        <h2 className="text-zinc-500 text-xs font-bold mt-5">Library</h2>
+        <h2 className="text-zinc-500 text-xs font-bold mt-5 px-2">Library</h2>
         <div className="flex flex-col">
           <Link
             href={`/mealPlan`}
