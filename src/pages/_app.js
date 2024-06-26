@@ -1,18 +1,24 @@
 import '@/styles/globals.css';
 import useServiceWorker from '../hooks/useServiceWorker';
 import Sidebar from '@/components/Sidebar';
+import { UserProvider } from '@/providers/UserContext';
+import AddRecipe_FromWebsite from '@/components/modals/AddRecipe_FromWebsite';
 
 function MyApp({ Component, pageProps }) {
   useServiceWorker();
 
   return (
-    <div className="flex min-h-screen bg-zinc-900">
-      <Sidebar />
+    <UserProvider>
+      <div className="flex min-h-screen bg-zinc-900">
+        <Sidebar />
 
-      <div className="flex-1">
-        <Component {...pageProps} />
+        <div className="flex-1">
+          <Component {...pageProps} />
+
+          <AddRecipe_FromWebsite />
+        </div>
       </div>
-    </div>
+    </UserProvider>
   );
 }
 
