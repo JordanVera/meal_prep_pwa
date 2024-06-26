@@ -9,6 +9,12 @@ export const UserProvider = ({ children }) => {
   const [openAddRecipeModal, setOpenAddRecipeModal] = useState(false);
   const handleOpenAddRecipeModal = () => setOpenAddRecipeModal((prev) => !prev);
 
+  const [openAddRecipeModalFull, setOpenAddRecipeModalFull] = useState(false);
+  const handleOpenAddRecipeModalFull = () =>
+    setOpenAddRecipeModalFull((prev) => !prev);
+
+  const [currentRecipe, setCurrentRecipe] = useState({});
+
   return (
     <UserContent.Provider
       value={{
@@ -16,6 +22,10 @@ export const UserProvider = ({ children }) => {
         setIsLoading,
         handleOpenAddRecipeModal,
         openAddRecipeModal,
+        openAddRecipeModalFull,
+        handleOpenAddRecipeModalFull,
+        currentRecipe,
+        setCurrentRecipe,
       }}
     >
       {children}

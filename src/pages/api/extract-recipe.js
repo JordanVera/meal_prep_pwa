@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       res.status(404).json({ error: 'Recipe not found' });
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to extract recipe' });
+    console.error(error.data);
+    res.status(500).json({ error: error.data });
   }
 }

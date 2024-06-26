@@ -6,7 +6,8 @@ const AddRecipeButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const { isLoading, handleOpenAddRecipeModal } = useUser();
+  const { isLoading, handleOpenAddRecipeModal, handleOpenAddRecipeModalFull } =
+    useUser();
 
   useEffect(() => {
     console.log({ isLoading });
@@ -23,7 +24,10 @@ const AddRecipeButton = () => {
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 shadow-lg rounded-md z-50">
-          <button className="block px-4 py-2 text-sm text-white hover:bg-zinc-800 w-full text-left">
+          <button
+            onClick={handleOpenAddRecipeModalFull}
+            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800 w-full text-left"
+          >
             Add Manually
           </button>
 

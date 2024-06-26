@@ -18,7 +18,12 @@ const style = {
 };
 
 export default function AddRecipe_FromWebsite() {
-  const { handleOpenAddRecipeModal, openAddRecipeModal } = useUser();
+  const {
+    handleOpenAddRecipeModal,
+    openAddRecipeModal,
+    currentRecipe,
+    setCurrentRecipe,
+  } = useUser();
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -30,8 +35,9 @@ export default function AddRecipe_FromWebsite() {
     try {
       const response = await axios.post('/api/extract-recipe', { url });
 
+      console.log('recipe data bru:');
       console.log(response.data);
-      // setRecipe(response.data);
+      setCurrentRecipe(response.data);
     } catch (error) {
       setError('Failed to extract recipe');
     } finally {
@@ -59,7 +65,7 @@ export default function AddRecipe_FromWebsite() {
 
             <input
               type="text"
-              placeholder="www.example.com/recipe"
+              placeholder="https://www.homechef.com/meals/maple-bbq-pecan-crusted-chicken"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               className="w-full mt-2 py-1 px-2 rounded-md bg-zinc-700 focus:outline-none border border-zinc-500 focus:border-blue-500"

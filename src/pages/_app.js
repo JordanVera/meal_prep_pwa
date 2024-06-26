@@ -3,6 +3,7 @@ import useServiceWorker from '../hooks/useServiceWorker';
 import Sidebar from '@/components/Sidebar';
 import { UserProvider } from '@/providers/UserContext';
 import AddRecipe_FromWebsite from '@/components/modals/AddRecipe_FromWebsite';
+import AddRecipe from '@/components/modals/AddRecipe';
 
 function MyApp({ Component, pageProps }) {
   useServiceWorker();
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }) {
         <div className="flex-1">
           <Component {...pageProps} />
 
+          <AddRecipe />
           <AddRecipe_FromWebsite />
         </div>
       </div>
