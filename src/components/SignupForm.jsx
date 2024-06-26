@@ -1,6 +1,7 @@
 // components/SignupForm.js
 import { useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 const SignupForm = () => {
   const [email, setEmail] = useState('');
@@ -33,7 +34,10 @@ const SignupForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5 max-w-[400px]">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-5 w-[300px] lg:w-[400px]"
+    >
       <label className="text-xs flex flex-col gap-1">
         Email
         <input
@@ -92,7 +96,19 @@ const SignupForm = () => {
         />
       </label>
       {error && <p>{error}</p>}
-      <button type="submit">Sign Up</button>
+      <button
+        className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
+        type="submit"
+      >
+        Sign Up
+      </button>
+
+      <p className="text-sm text-center">
+        Already have an account?{' '}
+        <Link className="text-blue-400 underline" href={'/login'}>
+          Login Here
+        </Link>
+      </p>
     </form>
   );
 };
