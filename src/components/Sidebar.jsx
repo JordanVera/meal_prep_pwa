@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, Brain } from 'lucide-react';
+import { Search, Brain, Home } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -22,6 +22,13 @@ const Sidebar = () => {
       <div className="flex flex-col">
         <h2 className="text-zinc-500 text-xs font-bold mt-5 px-2">Library</h2>
         <div className="flex flex-col">
+          <Link
+            href={`/`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          >
+            <Home className="text-orange-600 h-6 w-6" />
+            Home
+          </Link>
           <Link
             href={`/mealPlan`}
             className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"

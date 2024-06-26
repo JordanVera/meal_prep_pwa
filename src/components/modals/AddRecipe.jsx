@@ -134,7 +134,7 @@ export default function AddRecipe({ recipe }) {
             <div className="flex flex-col gap-2">
               <button
                 onClick={handleOpenAddRecipeModalFull}
-                className="bg-gradient-to-br from-orange-600 to-red-500 rounded-md py-1"
+                className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
               >
                 Add Recipe
               </button>
