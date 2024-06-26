@@ -2,18 +2,21 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     const result = await signIn('credentials', {
-      redirect: '/recipes',
+      redirect: false,
       email,
       password,
     });
@@ -21,7 +24,7 @@ const LoginForm = () => {
     if (result.error) {
       setError(result.error);
     } else {
-      // Handle success (e.g., redirect to home)
+      router.push('/recipes');
     }
   };
 
