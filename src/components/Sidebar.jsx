@@ -2,9 +2,15 @@ import { useState, useEffect } from 'react';
 import { Search, Brain, Home } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useUser } from '@/providers/UserContext';
 
 const Sidebar = () => {
   const [searchText, setSearchText] = useState('');
+  const { user, handleLogout } = useUser();
+
+  useEffect(() => {
+    console.log({ user });
+  }, [user]);
 
   return (
     <aside className="bg-zinc-800 w-[250px] min-h-screen p-3 border-r border-zinc-600">

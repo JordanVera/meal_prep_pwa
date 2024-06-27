@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 
 // Create Context
-const UserContent = createContext();
+const UserContext = createContext();
 
 // Provider Component
 export const UserProvider = ({ children }) => {
@@ -14,9 +15,25 @@ export const UserProvider = ({ children }) => {
     setOpenAddRecipeModalFull((prev) => !prev);
 
   const [currentRecipe, setCurrentRecipe] = useState({});
+  const [user, setUser] = useState(null);
+
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      setUser(session.user);
+    } else {
+      setUser(null);
+    }
+  }, [session, status]);
+
+  const handleLogout = async () => {
+    await signOut();
+    setUser(null);
+  };
 
   return (
-    <UserContent.Provider
+    <UserContext.Provider
       value={{
         isLoading,
         setIsLoading,
@@ -26,12 +43,14 @@ export const UserProvider = ({ children }) => {
         handleOpenAddRecipeModalFull,
         currentRecipe,
         setCurrentRecipe,
+        user,
+        handleLogout,
       }}
     >
       {children}
-    </UserContent.Provider>
+    </UserContext.Provider>
   );
 };
 
-// Custom hook to use the Loading context
-export const useUser = () => useContext(UserContent);
+// Custom hook to use the User context
+export const useUser = () => useContext(UserContext);
