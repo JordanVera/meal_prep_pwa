@@ -27,11 +27,11 @@ export const UserProvider = ({ children }) => {
   const fetchCurrentlyLoggedInUser = async (_) => {
     try {
       if (status === 'authenticated') {
-        const user = await UserService.getCurrentlyLoggedInUser();
+        const response = await UserService.getCurrentlyLoggedInUser();
 
         console.log('USER FRM PROVIDER');
-        console.log(user);
-        setUser(user);
+        console.log(response);
+        setUser(response.user);
       } else {
         setUser(null);
       }

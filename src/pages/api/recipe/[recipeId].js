@@ -10,29 +10,26 @@ export default async function handle(req, res) {
     case 'OPTIONS':
       return res.status(200).end();
     case 'GET':
-      return getCurrentlyLoggedInUser(req, res, session);
+      return getRecipeById(req, res, session);
     default:
       res.setHeader('Allow', ['GET', 'OPTIONS']);
       return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
 
-async function getCurrentlyLoggedInUser(req, res, session) {
+async function getRecipeById(req, res, session) {
   if (!session) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
   try {
-    // TODO: remove password from return
-    const user = await prisma.user.findUnique({
+    const recipe = await prisma.recipe.findUnique({
       where: {
-        id: session.user.id,
-      },
-      include: {
-        recipes: true,
+        id: Number(req.query.recipeId),
+        userId: session.user.id,
       },
     });
-    return res.status(200).json({ user });
+    return res.status(200).json({ recipe });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal Server Error' });
