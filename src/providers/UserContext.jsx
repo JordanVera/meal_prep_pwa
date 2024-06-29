@@ -1,6 +1,7 @@
 // providers/UserContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
+import UserService from '@/services/UserService';
 
 // Create Context
 const UserContext = createContext();
@@ -17,20 +18,27 @@ export const UserProvider = ({ children }) => {
 
   const [currentRecipe, setCurrentRecipe] = useState({});
   const [user, setUser] = useState(null);
-
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    console.log('Session status:', status);
-    console.log('Session data:', session);
-    if (status === 'authenticated') {
-      console.log('USER FROM PROVIDER');
-      console.log({ user: session.user });
-      setUser(session.user);
-    } else {
-      setUser(null);
-    }
+    fetchCurrentlyLoggedInUser();
   }, [session, status]);
+
+  const fetchCurrentlyLoggedInUser = async (_) => {
+    try {
+      if (status === 'authenticated') {
+        const user = await UserService.getCurrentlyLoggedInUser();
+
+        console.log('USER FRM PROVIDER');
+        console.log(user);
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleLogout = async () => {
     await signOut();
