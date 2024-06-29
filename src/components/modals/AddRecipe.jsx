@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function AddRecipe({ recipe }) {
+export default function AddRecipe() {
   const {
     handleOpenAddRecipeModalFull,
     openAddRecipeModalFull,
@@ -25,14 +25,46 @@ export default function AddRecipe({ recipe }) {
   const [loading, setLoading] = useState(false);
 
   const [title, setTitle] = useState(currentRecipe.title || '');
-  const [servings, setServings] = useState('');
+  const [servings, setServings] = useState(currentRecipe.servings || '');
   const [calories, setCalories] = useState('');
-  const [cookTime, setCookTime] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [cookTime, setCookTime] = useState(currentRecipe.readyInMinutes || '');
+  const [instructions, setInstructions] = useState(
+    currentRecipe.instructions || ''
+  );
 
   useEffect(() => {
-    console.log({ currentRecipe });
+    console.log('CURRENT RECIPE BRU');
+    console.log(currentRecipe);
+
+    setTitle(currentRecipe.title || '');
+    setServings(currentRecipe.servings || '');
+    setCookTime(currentRecipe.readyInMinutes || '');
+    setInstructions(currentRecipe.instructions || '');
+    // setCalories('');
   }, [currentRecipe]);
+
+  const handleSaveRecipe = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post('/api/save-recipe', {
+        title,
+        servings,
+        calories,
+        cookTime,
+        instructions,
+        image: currentRecipe.image,
+        sourceUrl: currentRecipe.sourceUrl,
+        sourceName: currentRecipe.sourceName,
+      });
+      
+      console.log('Saved recipe:', response.data);
+      handleOpenAddRecipeModalFull();
+    } catch (error) {
+      console.error('Failed to save recipe:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal
@@ -53,8 +85,7 @@ export default function AddRecipe({ recipe }) {
               Title
               <input
                 type="text"
-                // placeholder="www.example.com/recipe"
-                value={currentRecipe?.recipe?.title || title}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
               />
@@ -65,8 +96,7 @@ export default function AddRecipe({ recipe }) {
                 Servings
                 <input
                   type="text"
-                  // placeholder="www.example.com/recipe"
-                  value={currentRecipe?.recipe?.servings || servings}
+                  value={servings}
                   onChange={(e) => setServings(e.target.value)}
                   className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
                 />
@@ -76,30 +106,17 @@ export default function AddRecipe({ recipe }) {
                 Calories
                 <input
                   type="text"
-                  // placeholder="www.example.com/recipe"
                   value={calories}
                   onChange={(e) => setCalories(e.target.value)}
                   className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
                 />
               </label>
 
-              {/* <label className="text-xs flex flex-col gap-1">
-                Prep Time
-                <input
-                  type="text"
-                  // placeholder="www.example.com/recipe"
-                  value={prepTime}
-                  onChange={(e) => setPrepTime(e.target.value)}
-                  className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
-                />
-              </label> */}
-
               <label className="text-xs flex flex-col gap-1">
                 Cook Time
                 <input
                   type="text"
-                  // placeholder="www.example.com/recipe"
-                  value={currentRecipe?.recipe?.readyInMinutes || cookTime}
+                  value={cookTime}
                   onChange={(e) => setCookTime(e.target.value)}
                   className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
                 />
@@ -108,12 +125,8 @@ export default function AddRecipe({ recipe }) {
 
             <label className="text-xs flex flex-col gap-1">
               Image
-              {currentRecipe?.recipe?.image ? (
-                <img
-                  src={currentRecipe?.recipe?.image}
-                  height={200}
-                  width={200}
-                />
+              {currentRecipe?.image ? (
+                <img src={currentRecipe?.image} height={200} width={200} />
               ) : (
                 <p>no image...</p>
               )}
@@ -124,8 +137,7 @@ export default function AddRecipe({ recipe }) {
               <textarea
                 type="text"
                 rows="7"
-                // placeholder="www.example.com/recipe"
-                value={currentRecipe?.recipe?.instructions || instructions}
+                value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
                 className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
               />
@@ -133,7 +145,7 @@ export default function AddRecipe({ recipe }) {
 
             <div className="flex flex-col gap-2">
               <button
-                onClick={handleOpenAddRecipeModalFull}
+                onClick={handleSaveRecipe}
                 className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
               >
                 Add Recipe

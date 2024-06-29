@@ -1,8 +1,6 @@
 // pages/api/extract-recipe.js
 import axios from 'axios';
 
-const SPOONACULAR_API_KEY = 'a27ed32edc854fbbab486d3a512d830c';
-
 export default async function handler(req, res) {
   const { url } = req.body;
 
@@ -18,7 +16,7 @@ export default async function handler(req, res) {
     const response = await axios.get(
       `https://api.spoonacular.com/recipes/extract?url=${encodeURIComponent(
         url
-      )}&apiKey=${SPOONACULAR_API_KEY}`
+      )}&apiKey=${process.env.SPOONACULAR_API_KEY}`
     );
 
     if (response.data) {
@@ -39,7 +37,8 @@ export default async function handler(req, res) {
       res.status(404).json({ error: 'Recipe not found' });
     }
   } catch (error) {
-    console.error(error.data);
-    res.status(500).json({ error: error.data });
+    // console.error(error.data);
+    console.error(error.response.data.message);
+    res.status(500).json({ error: error.response.data.message });
   }
 }

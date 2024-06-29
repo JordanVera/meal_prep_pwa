@@ -15,6 +15,26 @@ model User {
   lastName  String
   password  String
 
+  recipes Recipe[]
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+}
+
+model Recipe {
+  id             Int     @id @default(autoincrement())
+  title          String
+  sourceUrl      String?
+  image          String?
+  servings       Int?
+  readyInMinutes Int?
+  calories       Int?
+  sourceName     String?
+  instructions   String? @db.Text
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
 }

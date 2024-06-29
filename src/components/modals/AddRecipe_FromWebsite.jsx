@@ -20,11 +20,14 @@ const style = {
 export default function AddRecipe_FromWebsite() {
   const {
     handleOpenAddRecipeModal,
+    handleOpenAddRecipeModalFull,
     openAddRecipeModal,
     currentRecipe,
     setCurrentRecipe,
   } = useUser();
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState(
+    'https://www.homechef.com/meals/steak-and-mushroom-white-wine-sauce-standard'
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [recipe, setRecipe] = useState(null);
@@ -37,11 +40,13 @@ export default function AddRecipe_FromWebsite() {
 
       console.log('recipe data bru:');
       console.log(response.data);
-      setCurrentRecipe(response.data);
+      setCurrentRecipe(response.data.recipe);
     } catch (error) {
       setError('Failed to extract recipe');
     } finally {
       setLoading(false);
+      handleOpenAddRecipeModal(); // Close the from website modal
+      handleOpenAddRecipeModalFull(); // open the full add recipe modal with recipe data
     }
   };
 

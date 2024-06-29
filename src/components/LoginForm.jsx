@@ -64,7 +64,7 @@ const LoginForm = () => {
       </button>
 
       <p className="text-sm text-center">
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <Link className="text-blue-400 underline" href={'/'}>
           Signup Here
         </Link>
