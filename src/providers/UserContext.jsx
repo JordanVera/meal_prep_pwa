@@ -1,3 +1,4 @@
+// providers/UserContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
@@ -20,7 +21,11 @@ export const UserProvider = ({ children }) => {
   const { data: session, status } = useSession();
 
   useEffect(() => {
+    console.log('Session status:', status);
+    console.log('Session data:', session);
     if (status === 'authenticated') {
+      console.log('USER FROM PROVIDER');
+      console.log({ user: session.user });
       setUser(session.user);
     } else {
       setUser(null);

@@ -1,50 +1,89 @@
 // pages/api/auth/[...nextauth].js
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { PrismaClient } from '@prisma/client';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import bcrypt from 'bcryptjs';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export default NextAuth({
+export const authOptions = {
+  adapter: PrismaAdapter(prisma),
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET,
+  },
+  session: {
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,
+  },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'text' },
+        identifier: { label: 'Email or Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials) => {
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
+        console.log('authorize credentials', credentials);
 
-        if (user && bcrypt.compareSync(credentials.password, user.password)) {
-          return user;
+        const { identifier, password } = credentials;
+
+        if (!identifier || !password) {
+          throw new Error('Invalid identifier or password');
         }
 
-        return null;
+        const user = await prisma.user.findFirst({
+          where: {
+            email: identifier,
+          },
+        });
+
+        if (!user) {
+          throw new Error('Invalid username/email or password.');
+        }
+
+        const isValid = await bcrypt.compare(password, user.password);
+
+        if (!isValid) {
+          throw new Error('Invalid username/email or password.');
+        }
+
+        console.log('authorized user', user);
+        return user;
       },
     }),
   ],
-  adapter: PrismaAdapter(prisma),
-  session: {
-    jwt: true,
-  },
   callbacks: {
-    async jwt(token, user) {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log('User signed in:', user);
+      return true;
+    },
+    async session({ session, token }) {
+      console.log('session callback - token:', token);
+      session.user = token.user;
+      console.log('session callback - session:', session);
+      return session;
+    },
+    async jwt({ token, user }) {
+      console.log('JWT callback - user:', user);
       if (user) {
-        token.id = user.id;
+        token.user = {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        };
       }
+      console.log('JWT callback - token:', token);
       return token;
     },
-    async session(session, token) {
-      if (token) {
-        session.id = token.id;
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith('/') || new URL(url).origin === baseUrl) {
+        return url;
       }
-      return session;
+      return baseUrl;
     },
   },
   secret: process.env.SECRET,
-});
+};
+
+export default NextAuth(authOptions);

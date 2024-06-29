@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -17,7 +17,7 @@ const LoginForm = () => {
 
     const result = await signIn('credentials', {
       redirect: false,
-      email,
+      identifier,
       password,
     });
 
@@ -34,13 +34,13 @@ const LoginForm = () => {
       className="flex flex-col gap-5 w-[300px] lg:w-[400px]"
     >
       <label className="text-xs flex flex-col gap-1">
-        Email
+        Email or Username
         <input
           className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
+          type="text"
+          value={identifier}
+          onChange={(e) => setIdentifier(e.target.value)}
+          placeholder="Email or Username"
           required
         />
       </label>
