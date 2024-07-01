@@ -70,6 +70,16 @@ const RecipeProfile = () => {
             {recipe.sourceName}
           </a>
         </div>
+
+        <div>
+          <h2 className="text-white font-bold text-md">Instructions</h2>
+
+          <div
+            dangerouslySetInnerHTML={{
+              __html: recipe.instructions.replace(/\n/g, '<br />'),
+            }}
+          ></div>
+        </div>
       </main>
     </div>
   );
