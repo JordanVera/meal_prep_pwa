@@ -46,7 +46,7 @@ model Step {
   content String @db.LongText
 
   recipeId Int
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
