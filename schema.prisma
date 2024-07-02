@@ -37,4 +37,17 @@ model Recipe {
 
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
+  Step      Step[]
+}
+
+model Step {
+  id      Int    @id @default(autoincrement())
+  step    Int
+  content String
+
+  recipeId Int
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
 }

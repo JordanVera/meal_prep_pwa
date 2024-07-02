@@ -1,7 +1,7 @@
 // pages/api/save-recipe.js
 import { PrismaClient } from '@prisma/client';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from './auth/[...nextauth]';
+import { authOptions } from '../auth/[...nextauth]';
 
 const prisma = new PrismaClient();
 
@@ -25,6 +25,7 @@ export default async function handler(req, res) {
     image,
     sourceUrl,
     sourceName,
+    steps,
   } = req.body;
 
   try {
@@ -42,6 +43,16 @@ export default async function handler(req, res) {
           connect: { email: session.user.email },
         },
       },
+    });
+
+    steps.map(async (step) => {
+      await prisma.recipe_step.create({
+        data: {
+          recipeId: recipe.id,
+          step: step.content,
+          recipeId: recipe.id,
+        },
+      });
     });
 
     res.status(200).json({ recipe });

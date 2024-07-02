@@ -32,6 +32,7 @@ export default function AddRecipe() {
   const [instructions, setInstructions] = useState(
     currentRecipe.instructions || ''
   );
+  const [steps, setSteps] = useState([]);
 
   useEffect(() => {
     console.log('CURRENT RECIPE BRU');
@@ -41,13 +42,22 @@ export default function AddRecipe() {
     setServings(currentRecipe.servings || '');
     setCookTime(currentRecipe.readyInMinutes || '');
     setInstructions(currentRecipe.instructions || '');
+
+    setSteps(extractSteps(currentRecipe.instructions || ''));
     // setCalories('');
   }, [currentRecipe]);
+
+  useEffect(() => {
+    console.log({ instructions });
+  }, [instructions]);
+  useEffect(() => {
+    console.log({ steps });
+  }, [steps]);
 
   const handleSaveRecipe = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('/api/save-recipe', {
+      const response = await axios.post('/api/recipe', {
         title,
         servings,
         calories,
@@ -56,6 +66,7 @@ export default function AddRecipe() {
         image: currentRecipe.image,
         sourceUrl: currentRecipe.sourceUrl,
         sourceName: currentRecipe.sourceName,
+        steps,
       });
 
       console.log('Saved recipe:', response.data);
@@ -66,6 +77,20 @@ export default function AddRecipe() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const extractSteps = (text) => {
+    // Regular expression to match steps starting with a number followed by some text
+    const stepPattern = /\d+\s*\n\s*([A-Za-z].*?)(?=\n\d+|\n*$)/gs;
+    let steps = [];
+    let match;
+
+    // Loop through all matches of the pattern in the text
+    while ((match = stepPattern.exec(text)) !== null) {
+      steps.push(match[1].trim());
+    }
+
+    return steps;
   };
 
   return (

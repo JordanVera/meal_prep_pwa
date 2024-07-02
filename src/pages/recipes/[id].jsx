@@ -103,11 +103,16 @@ const RecipeProfile = () => {
           </button>
 
           <div className="flex gap-3">
-            <button className="rounded-full bg-blue-500 bg-opacity-50 flex items-center justify-center p-3">
-              <Send className="h-5 w-5 text-blue-500" />
-            </button>
+            <a
+              href={recipe.sourceUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="rounded-full bg-blue-500 bg-opacity-50 flex items-center justify-center p-3"
+            >
+              <Link className="h-5 w-5 text-blue-500" />
+            </a>
             <button className="rounded-full bg-purple-500 bg-opacity-50 flex items-center justify-center p-3">
-              <Link className="h-5 w-5 text-purple-500" />
+              <Send className="h-5 w-5 text-purple-500" />
             </button>
           </div>
         </section>
