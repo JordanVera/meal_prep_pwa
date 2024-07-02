@@ -59,13 +59,13 @@ export const authOptions = {
       return true;
     },
     async session({ session, token }) {
-      console.log('session callback - token:', token);
+      // console.log('session callback - token:', token);
+      // console.log('session callback - session:', session);
       session.user = token.user;
-      console.log('session callback - session:', session);
       return session;
     },
     async jwt({ token, user }) {
-      console.log('JWT callback - user:', user);
+      // console.log('JWT callback - user:', user);
       if (user) {
         token.user = {
           id: user.id,
@@ -73,7 +73,7 @@ export const authOptions = {
           username: user.username,
         };
       }
-      console.log('JWT callback - token:', token);
+      // console.log('JWT callback - token:', token);
       return token;
     },
     async redirect({ url, baseUrl }) {

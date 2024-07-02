@@ -45,12 +45,13 @@ export default async function handler(req, res) {
       },
     });
 
-    steps.map(async (step) => {
-      await prisma.recipe_step.create({
+    steps.map(async (step, index) => {
+      await prisma.step.create({
         data: {
           recipeId: recipe.id,
-          step: step.content,
+          step: index + 1,
           recipeId: recipe.id,
+          content: step,
         },
       });
     });

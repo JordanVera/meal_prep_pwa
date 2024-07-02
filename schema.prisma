@@ -43,7 +43,7 @@ model Recipe {
 model Step {
   id      Int    @id @default(autoincrement())
   step    Int
-  content String
+  content String @db.LongText
 
   recipeId Int
   recipe   Recipe @relation(fields: [recipeId], references: [id])

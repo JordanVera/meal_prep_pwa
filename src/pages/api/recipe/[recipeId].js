@@ -30,6 +30,9 @@ async function getRecipeById(req, res, session) {
         id: Number(req.query.recipeId),
         userId: session.user.id,
       },
+      include: {
+        Step: true,
+      },
     });
     return res.status(200).json({ recipe });
   } catch (error) {

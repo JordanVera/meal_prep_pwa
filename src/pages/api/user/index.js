@@ -29,7 +29,11 @@ async function getCurrentlyLoggedInUser(req, res, session) {
         id: session.user.id,
       },
       include: {
-        recipes: true,
+        recipes: {
+          include: {
+            Step: true,
+          },
+        },
       },
     });
     return res.status(200).json({ user });

@@ -117,14 +117,25 @@ const RecipeProfile = () => {
           </div>
         </section>
 
-        <div className="bg-zinc-800 text-gray-400 rounded-md py-2 w-full flex justify-center items-center gap-2">
+        <div className="bg-zinc-700 text-gray-400 rounded-xl py-2 w-full flex justify-center items-center gap-2">
           <Users className="h-4 w-4 text-gray-400" />
           {recipe.servings}
         </div>
         <div>
-          <h2 className="text-white font-bold text-md">Instructions</h2>
+          <h2 className="text-white font-bold text-sm mb-2">Instructions</h2>
 
-          <p className="text-xs">{recipe.instructions}</p>
+          <div className="flex flex-col gap-5">
+            {recipe?.Step?.sort((x, y) => x.step - y.step).map((step) => (
+              <div className="flex gap-3.5 bg-zinc-700 rounded-xl p-3">
+                <div>
+                  <p className="rounded-full bg-blue-500 h-6 w-6 flex items-center justify-center text-xs">
+                    {step.step}
+                  </p>
+                </div>
+                <p className="text-xs">{step.content}</p>
+              </div>
+            ))}
+          </div>
           {/* <div
             dangerouslySetInnerHTML={{
               __html: recipe.instructions.replace(/\n/g, '<br />'),

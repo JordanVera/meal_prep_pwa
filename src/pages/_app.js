@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <UserProvider>
-        <div className="flex min-h-screen bg-zinc-900">
+        <div className="flex min-h-screen bg-zinc-900 relative">
           <Sidebar />
           <div className="flex-1">
             <Component {...pageProps} />
