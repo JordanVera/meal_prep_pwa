@@ -20,7 +20,7 @@ const Sidebar = () => {
   }, [session]);
 
   return (
-    <aside className="bg-zinc-800 w-[250px] min-h-screen p-3 border-r border-zinc-600 sticky">
+    <aside className="bg-zinc-800 w-[250px] min-h-screen p-3 border-r border-zinc-600 fixed top-0">
       <div className="relative">
         <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-zinc-600 h-5 w-5" />
         <input
@@ -90,4 +90,5 @@ const Sidebar = () => {
     </aside>
   );
 };
+
 export default Sidebar;

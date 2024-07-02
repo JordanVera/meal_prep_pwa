@@ -12,10 +12,22 @@
   }
 }
 
+/* globals.css */
+
 html,
 body {
   color: rgb(var(--foreground-rgb));
   background: transparent;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 @layer utilities {
