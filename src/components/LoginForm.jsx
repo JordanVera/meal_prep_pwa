@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { showSuccessToast, showErrorToast } from '@/utils/toasts';
 
 const LoginForm = ({ setIsSignupOrLogin }) => {
   const [identifier, setIdentifier] = useState('');
@@ -22,13 +23,13 @@ const LoginForm = ({ setIsSignupOrLogin }) => {
       });
 
       if (result.error) {
-        setError(result.error);
+        showErrorToast(result.error);
       } else {
         router.push('/recipes');
+        showSuccessToast('Login Successful');
       }
     } catch (error) {
       console.log(error);
-    } finally {
     }
   };
 

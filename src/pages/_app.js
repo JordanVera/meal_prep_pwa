@@ -7,6 +7,9 @@ import AddRecipe_FromWebsite from '@/components/modals/AddRecipe_FromWebsite';
 import AddRecipe from '@/components/modals/AddRecipe';
 import { SessionProvider } from 'next-auth/react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   useServiceWorker();
 
@@ -21,6 +24,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             <AddRecipe_FromWebsite />
           </div>
         </div>
+        <ToastContainer />
       </UserProvider>
     </SessionProvider>
   );
