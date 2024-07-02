@@ -3,14 +3,17 @@ import AddRecipeButton from '@/components/buttons/AddRecipeButton';
 import { useUser } from '@/providers/UserContext';
 import { useParams } from 'next/navigation';
 import UserService from '@/services/UserService';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { IconButton } from '@mui/material';
+import { Link, Play, Send } from 'lucide-react';
 
 const RecipeProfile = () => {
-  const { user } = useUser();
+  const { user, fetchCurrentlyLoggedInUser } = useUser();
   const { id } = useParams();
 
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     console.log('id:');
@@ -37,6 +40,22 @@ const RecipeProfile = () => {
     }
   };
 
+  const deleteRecipe = async () => {
+    setLoading(true);
+    try {
+      const response = await UserService.deleteRecipeById(id);
+
+      console.log(response);
+      await fetchCurrentlyLoggedInUser();
+
+      router.push('/recipes');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -45,8 +64,15 @@ const RecipeProfile = () => {
     <div>
       <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800 py-2 px-5">
         <h1>Recipes</h1>
+        <button
+          onClick={deleteRecipe}
+          className="border border-red-500 bg-red-500 text-red-500 bg-opacity-50 py-1 px-2 rounded-md"
+        >
+          Delete Recipe
+        </button>
         <AddRecipeButton />
       </header>
+
       <main className="p-5 flex flex-col gap-5 max-w-[600px] mx-auto">
         <div
           className="flex-auto rounded-lg  h-[180px] relative"
@@ -70,6 +96,21 @@ const RecipeProfile = () => {
             {recipe.sourceName}
           </a>
         </div>
+        <section className="flex justify-between">
+          <button className="rounded-full bg-green-500 bg-opacity-50 text-green-500 items-center justify-center px-3 py-1 flex gap-2">
+            <Play className="h-5 w-5 text-green-500" />
+            Start
+          </button>
+
+          <div className="flex gap-3">
+            <button className="rounded-full bg-blue-500 bg-opacity-50 flex items-center justify-center p-3">
+              <Send className="h-5 w-5 text-blue-500" />
+            </button>
+            <button className="rounded-full bg-purple-500 bg-opacity-50 flex items-center justify-center p-3">
+              <Link className="h-5 w-5 text-purple-500" />
+            </button>
+          </div>
+        </section>
 
         <div>
           <h2 className="text-white font-bold text-md">Instructions</h2>
@@ -85,4 +126,5 @@ const RecipeProfile = () => {
     </div>
   );
 };
+
 export default RecipeProfile;

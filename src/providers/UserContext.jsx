@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
       if (status === 'authenticated') {
         const response = await UserService.getCurrentlyLoggedInUser();
 
-        console.log('USER FRM PROVIDER');
+        console.log('USER FROM PROVIDER');
         console.log(response);
         setUser(response.user);
       } else {
@@ -57,6 +57,7 @@ export const UserProvider = ({ children }) => {
         currentRecipe,
         setCurrentRecipe,
         user,
+        fetchCurrentlyLoggedInUser, // Export this function
         handleLogout,
       }}
     >

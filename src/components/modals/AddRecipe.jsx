@@ -21,6 +21,7 @@ export default function AddRecipe() {
     handleOpenAddRecipeModalFull,
     openAddRecipeModalFull,
     currentRecipe,
+    fetchCurrentlyLoggedInUser,
   } = useUser();
   const [loading, setLoading] = useState(false);
 
@@ -56,9 +57,10 @@ export default function AddRecipe() {
         sourceUrl: currentRecipe.sourceUrl,
         sourceName: currentRecipe.sourceName,
       });
-      
+
       console.log('Saved recipe:', response.data);
       handleOpenAddRecipeModalFull();
+      await fetchCurrentlyLoggedInUser();
     } catch (error) {
       console.error('Failed to save recipe:', error);
     } finally {
