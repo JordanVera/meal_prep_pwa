@@ -4,7 +4,12 @@ import Modal from '@mui/material/Modal';
 import { useUser } from '@/providers/UserContext';
 import axios from 'axios';
 import { BounceLoader } from 'react-spinners';
-import Image from 'next/image';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Plus, Minus } from 'lucide-react';
+
+import Collapse from '@mui/material/Collapse';
+
+import { TransitionGroup } from 'react-transition-group';
 
 const style = {
   position: 'absolute',
@@ -33,6 +38,7 @@ export default function AddRecipe() {
     currentRecipe.instructions || ''
   );
   const [steps, setSteps] = useState([]);
+  const [addingNewStep, setAddingNewStep] = useState(false);
 
   useEffect(() => {
     console.log('CURRENT RECIPE BRU');
@@ -42,7 +48,6 @@ export default function AddRecipe() {
     setServings(currentRecipe.servings || '');
     setCookTime(currentRecipe.readyInMinutes || '');
     setInstructions(currentRecipe.instructions || '');
-
     setSteps(extractSteps(currentRecipe.instructions || ''));
     // setCalories('');
   }, [currentRecipe]);
@@ -93,6 +98,10 @@ export default function AddRecipe() {
     return steps;
   };
 
+  useEffect(() => {
+    console.log({ steps });
+  }, [steps]);
+
   return (
     <Modal
       open={openAddRecipeModalFull}
@@ -101,11 +110,14 @@ export default function AddRecipe() {
       aria-describedby="modal-modal-description"
       size="small"
     >
-      <Box sx={style} className="bg-zinc-900 rounded-xl w-[400px]">
+      <Box
+        sx={style}
+        className="bg-zinc-900 rounded-xl  min-w-[450px] max-w-[600px] overflow-scroll"
+      >
         {loading ? (
           <BounceLoader color="#ff0000" loading={loading} size={50} />
         ) : (
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-10 max-h-[90vh] ">
             <h2 className="font-bold text-sm text-center">Add Recipe</h2>
 
             <label className="text-xs flex flex-col gap-1">
@@ -159,6 +171,55 @@ export default function AddRecipe() {
               )}
             </label>
 
+            <section>
+              <h2 className="text-xs mb-1">Steps</h2>
+              <div className="bg-zinc-800 rounded-md">
+                <TransitionGroup>
+                  {steps.map((step, index) => (
+                    <Collapse key={index} in={true}>
+                      <div className="border-b border-gray-600 p-3 flex items-center gap-5">
+                        <button
+                          className="rounded-full bg-red-600"
+                          onClick={() => {
+                            setSteps((currentSteps) =>
+                              currentSteps.filter((_, i) => i !== index)
+                            );
+                          }}
+                        >
+                          <Minus className="h-4 w-4" />
+                        </button>{' '}
+                        <p className="text-xs">{step}</p>
+                        {addingNewStep && steps.length - 1 === index && (
+                          <input
+                            autoFocus
+                            type="text"
+                            name="step"
+                            id="step"
+                            className="bg-zinc-800 text-white text-xs p-2 focus:outline-none w-full flex-grow"
+                          />
+                        )}
+                      </div>
+                    </Collapse>
+                  ))}
+                </TransitionGroup>
+
+                <div className="flex gap-3 items-center p-3">
+                  <button
+                    onClick={() => {
+                      setSteps((prev) => [...prev, '']);
+                      setAddingNewStep(true);
+                    }}
+                    className="bg-gradient-to-br from-blue-500 to-purple-700 w-full rounded-md py-2 text-xs flex items-center justify-center gap-1.5"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Add Step
+                  </button>
+
+                  <MoreHorizIcon className="h-6 w-6" />
+                </div>
+              </div>
+            </section>
+
             <label className="text-xs flex flex-col gap-1">
               Instructions
               <textarea
@@ -173,7 +234,7 @@ export default function AddRecipe() {
             <div className="flex flex-col gap-2">
               <button
                 onClick={handleSaveRecipe}
-                className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
+                className="text-xs bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-2"
               >
                 Add Recipe
               </button>
