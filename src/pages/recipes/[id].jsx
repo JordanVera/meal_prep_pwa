@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import UserService from '@/services/UserService';
 import { useRouter } from 'next/router';
 import { IconButton } from '@mui/material';
-import { Link, Play, Send } from 'lucide-react';
+import { Link, Play, Send, Users } from 'lucide-react';
 
 const RecipeProfile = () => {
   const { user, fetchCurrentlyLoggedInUser } = useUser();
@@ -112,6 +112,10 @@ const RecipeProfile = () => {
           </div>
         </section>
 
+        <div className="bg-zinc-800 text-gray-400 rounded-md py-2 w-full flex justify-center items-center gap-2">
+          <Users className="h-4 w-4 text-gray-400" />
+          {recipe.servings}
+        </div>
         <div>
           <h2 className="text-white font-bold text-md">Instructions</h2>
 
