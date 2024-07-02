@@ -74,11 +74,12 @@ const RecipeProfile = () => {
         <div>
           <h2 className="text-white font-bold text-md">Instructions</h2>
 
-          <div
+          <p className="text-xs">{recipe.instructions}</p>
+          {/* <div
             dangerouslySetInnerHTML={{
               __html: recipe.instructions.replace(/\n/g, '<br />'),
             }}
-          ></div>
+          ></div> */}
         </div>
       </main>
     </div>

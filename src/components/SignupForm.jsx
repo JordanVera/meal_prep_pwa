@@ -1,9 +1,8 @@
 // components/SignupForm.js
 import { useState } from 'react';
 import axios from 'axios';
-import Link from 'next/link';
 
-const SignupForm = () => {
+const SignupForm = ({ setIsSignupOrLogin }) => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -105,9 +104,13 @@ const SignupForm = () => {
 
       <p className="text-sm text-center">
         Already have an account?{' '}
-        <Link className="text-blue-400 underline" href={'/login'}>
+        <button
+          onClick={() => setIsSignupOrLogin((prev) => !prev)}
+          className="text-blue-400 underline"
+          href={'/login'}
+        >
           Login Here
-        </Link>
+        </button>
       </p>
     </form>
   );

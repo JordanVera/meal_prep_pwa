@@ -1,10 +1,9 @@
 // components/LoginForm.js
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const LoginForm = () => {
+const LoginForm = ({ setIsSignupOrLogin }) => {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,16 +14,21 @@ const LoginForm = () => {
     e.preventDefault();
     setError('');
 
-    const result = await signIn('credentials', {
-      redirect: false,
-      identifier,
-      password,
-    });
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        identifier,
+        password,
+      });
 
-    if (result.error) {
-      setError(result.error);
-    } else {
-      router.push('/recipes');
+      if (result.error) {
+        setError(result.error);
+      } else {
+        router.push('/recipes');
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
     }
   };
 
@@ -55,7 +59,7 @@ const LoginForm = () => {
           required
         />
       </label>
-      {error && <p>{error}</p>}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
       <button
         className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
         type="submit"
@@ -65,9 +69,13 @@ const LoginForm = () => {
 
       <p className="text-sm text-center">
         Don&apos;t have an account?{' '}
-        <Link className="text-blue-400 underline" href={'/'}>
+        <button
+          onClick={() => setIsSignupOrLogin((prev) => !prev)}
+          className="text-blue-400 underline"
+          href={'/'}
+        >
           Signup Here
-        </Link>
+        </button>
       </p>
     </form>
   );
