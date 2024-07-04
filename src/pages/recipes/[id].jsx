@@ -174,7 +174,7 @@ const RecipeProfile = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-wrap gap-3">
             {recipe?.Ingredient?.map((ingredient) => (
               <div className="flex gap-3.5 bg-zinc-700 rounded-xl p-3">
                 <p className="text-xs">
