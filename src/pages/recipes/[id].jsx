@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import AddRecipeButton from '@/components/buttons/AddRecipeButton';
+import RecipeProfileHeaderButton from '@/components/buttons/RecipeProfileHeaderButton';
 import { useUser } from '@/providers/UserContext';
 import { useParams } from 'next/navigation';
 import UserService from '@/services/UserService';
@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Link, Play, Send, Users } from 'lucide-react';
 import Ingredients from '@/components/recipes/Ingredients';
 import Instructions from '@/components/recipes/Instructions';
+import DeleteRecipeConfirmation from '@/components/modals/DeleteRecipeConfirmation';
 
 const RecipeProfile = () => {
   const { user, fetchCurrentlyLoggedInUser } = useUser();
@@ -15,11 +16,12 @@ const RecipeProfile = () => {
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
   const [measurementSystem, setMeasurementSystem] = useState('us');
+  const [openDeleteRecipeModal, setOpenDeleteRecipeModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    console.log('id:');
-    console.log(id);
+    console.log('openDeleteRecipeModal: ');
+    console.log(openDeleteRecipeModal);
   }, [user]);
 
   useEffect(() => {
@@ -65,14 +67,12 @@ const RecipeProfile = () => {
   return (
     <div>
       <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800 py-2 px-5">
-        <h1>Recipes</h1>
-        <button
-          onClick={deleteRecipe}
-          className="border border-red-500 bg-red-500 text-red-500 bg-opacity-50 py-1 px-2 rounded-md"
-        >
-          Delete Recipe
-        </button>
-        <AddRecipeButton />
+        <h1>{recipe.title}</h1>
+
+        <RecipeProfileHeaderButton
+          id={id}
+          setOpenDeleteRecipeModal={setOpenDeleteRecipeModal}
+        />
       </header>
 
       <main className="p-5 flex flex-col gap-5 max-w-[600px] mx-auto">
@@ -136,6 +136,12 @@ const RecipeProfile = () => {
 
         <Instructions recipe={recipe} />
       </main>
+
+      <DeleteRecipeConfirmation
+        deleteRecipe={deleteRecipe}
+        openDeleteRecipeModal={openDeleteRecipeModal}
+        setOpenDeleteRecipeModal={setOpenDeleteRecipeModal}
+      />
     </div>
   );
 };

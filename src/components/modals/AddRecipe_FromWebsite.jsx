@@ -30,7 +30,6 @@ export default function AddRecipe_FromWebsite() {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [recipe, setRecipe] = useState(null);
 
   const handleImport = async () => {
     setLoading(true);
@@ -95,28 +94,6 @@ export default function AddRecipe_FromWebsite() {
             {error && (
               <p className="text-red-500 text-xs text-center mt-2">{error}</p>
             )}
-            {/* {recipe && (
-          <div className="mt-4">
-          <h3 className="font-bold text-sm">Recipe:</h3>
-          <p className="text-xs">{recipe.title}</p>
-          <h4 className="font-bold text-xs mt-2">Ingredients:</h4>
-          <ul className="list-disc list-inside">
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index} className="text-xs">
-            {ingredient}
-            </li>
-            ))}
-            </ul>
-            <h4 className="font-bold text-xs mt-2">Instructions:</h4>
-            <ol className="list-decimal list-inside">
-            {recipe.instructions.map((instruction, index) => (
-              <li key={index} className="text-xs">
-              {instruction}
-              </li>
-              ))}
-              </ol>
-              </div>
-              )} */}
           </div>
         )}
       </Box>
