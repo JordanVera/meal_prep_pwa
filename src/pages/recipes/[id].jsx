@@ -5,7 +5,8 @@ import { useParams } from 'next/navigation';
 import UserService from '@/services/UserService';
 import { useRouter } from 'next/router';
 import { Link, Play, Send, Users } from 'lucide-react';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import Ingredients from '@/components/recipes/Ingredients';
+import Instructions from '@/components/recipes/Instructions';
 
 const RecipeProfile = () => {
   const { user, fetchCurrentlyLoggedInUser } = useUser();
@@ -13,6 +14,7 @@ const RecipeProfile = () => {
 
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
+  const [measurementSystem, setMeasurementSystem] = useState('us');
   const router = useRouter();
 
   useEffect(() => {
@@ -56,31 +58,6 @@ const RecipeProfile = () => {
     }
   };
 
-  const [measurementSystem, setMeasurementSystem] = useState('us');
-
-  function gcd(a, b) {
-    if (b === 0) return a;
-    return gcd(b, a % b);
-  }
-
-  // Function to convert decimal to fraction
-  function decimalToFraction(decimal) {
-    if (decimal % 1 === 0) return `${decimal}/1`; // Check if the decimal is actually an integer
-    const len = decimal.toString().length - 2; // Get the number of digits after the decimal
-    let denominator = Math.pow(10, len); // Calculate the denominator
-    let numerator = decimal * denominator; // Calculate the numerator
-    const divisor = gcd(numerator, denominator); // Find the GCD of numerator and denominator
-    numerator /= divisor; // Simplify the numerator
-    denominator /= divisor; // Simplify the denominator
-    return `${Math.round(numerator)}/${Math.round(denominator)}`; // Return the fraction
-  }
-
-  const roundDecimals = (number) => {
-    if (number % 1 === 0) return number;
-
-    return number.toFixed(2);
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -99,7 +76,7 @@ const RecipeProfile = () => {
       </header>
 
       <main className="p-5 flex flex-col gap-5 max-w-[600px] mx-auto">
-        <div
+        <header
           className="flex-auto rounded-lg  h-[180px] relative"
           style={{
             backgroundImage: `url(${recipe?.image})`,
@@ -120,7 +97,8 @@ const RecipeProfile = () => {
           >
             {recipe.sourceName}
           </a>
-        </div>
+        </header>
+
         <section className="flex justify-between">
           <button className="rounded-full bg-green-500 bg-opacity-50 text-green-500 items-center justify-center px-3 py-1 flex gap-2">
             <Play className="h-5 w-5 text-green-500" />
@@ -150,69 +128,13 @@ const RecipeProfile = () => {
           </div>
         </section>
 
-        <section>
-          <div className="flex justify-between items-center">
-            <h2 className="text-white font-bold text-sm mb-2">Ingredients</h2>
+        <Ingredients
+          measurementSystem={measurementSystem}
+          setMeasurementSystem={setMeasurementSystem}
+          recipe={recipe}
+        />
 
-            <div className="flex gap-0">
-              <button
-                onClick={() => setMeasurementSystem('us')}
-                className={`px-2 py-1 rounded-md text-xs transition-colors ease-in-out duration-300 ${
-                  measurementSystem === 'us' ? 'bg-green-500 bg-opacity-50' : ''
-                }`}
-              >
-                us
-              </button>
-
-              <button
-                onClick={() => setMeasurementSystem('metric')}
-                className={`px-2 py-1 rounded-md text-xs transition-colors ease-in-out duration-300 ${
-                  measurementSystem === 'metric'
-                    ? 'bg-green-500 bg-opacity-50'
-                    : ''
-                }`}
-              >
-                metric
-              </button>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            {recipe?.Ingredient?.map((ingredient) => (
-              <div className="flex gap-3.5 bg-zinc-700 rounded-xl p-3">
-                <p className="text-xs">
-                  <span>
-                    {measurementSystem === 'us'
-                      ? `${roundDecimals(ingredient.amount_us)}${
-                          ingredient.unitShort_us
-                        }`
-                      : `${roundDecimals(ingredient.amount_metric)}${
-                          ingredient.unitShort_metric
-                        }`}
-                  </span>{' '}
-                  {ingredient.name}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-white font-bold text-sm mb-2">Instructions</h2>
-
-          <div className="flex flex-col gap-5">
-            {recipe?.Step?.sort((x, y) => x.step - y.step).map((step) => (
-              <div className="flex gap-3.5 bg-zinc-700 rounded-xl p-3">
-                <div>
-                  <p className="rounded-full bg-blue-500 h-6 w-6 flex items-center justify-center text-xs">
-                    {step.step}
-                  </p>
-                </div>
-                <p className="text-xs">{step.content}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <Instructions recipe={recipe} />
       </main>
     </div>
   );
