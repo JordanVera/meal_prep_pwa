@@ -33,9 +33,12 @@ const Ingredients = ({ measurementSystem, setMeasurementSystem, recipe }) => {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      <div
+        className="grid grid-flow-row auto-rows-max gap-3"
+        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}
+      >
         {recipe?.Ingredient?.map((ingredient) => (
-          <div className="flex gap-3.5 bg-zinc-700 rounded-xl p-3">
+          <div className="bg-zinc-700 rounded-xl p-3">
             <p className="text-xs">
               <span>
                 {measurementSystem === 'us'
