@@ -58,8 +58,27 @@ const RecipeProfile = () => {
 
   const [measurementSystem, setMeasurementSystem] = useState('us');
 
-  const handleChange = (event, system) => {
-    setMeasurementSystem(system);
+  function gcd(a, b) {
+    if (b === 0) return a;
+    return gcd(b, a % b);
+  }
+
+  // Function to convert decimal to fraction
+  function decimalToFraction(decimal) {
+    if (decimal % 1 === 0) return `${decimal}/1`; // Check if the decimal is actually an integer
+    const len = decimal.toString().length - 2; // Get the number of digits after the decimal
+    let denominator = Math.pow(10, len); // Calculate the denominator
+    let numerator = decimal * denominator; // Calculate the numerator
+    const divisor = gcd(numerator, denominator); // Find the GCD of numerator and denominator
+    numerator /= divisor; // Simplify the numerator
+    denominator /= divisor; // Simplify the denominator
+    return `${Math.round(numerator)}/${Math.round(denominator)}`; // Return the fraction
+  }
+
+  const roundDecimals = (number) => {
+    if (number % 1 === 0) return number;
+
+    return number.toFixed(2);
   };
 
   if (loading) {
@@ -161,8 +180,12 @@ const RecipeProfile = () => {
                 <p className="text-xs">
                   <span>
                     {measurementSystem === 'us'
-                      ? `${ingredient.amount_us}${ingredient.unitShort_us}`
-                      : `${ingredient.amount_metric}${ingredient.unitShort_metric}`}
+                      ? `${roundDecimals(ingredient.amount_us)}${
+                          ingredient.unitShort_us
+                        }`
+                      : `${roundDecimals(ingredient.amount_metric)}${
+                          ingredient.unitShort_metric
+                        }`}
                   </span>{' '}
                   {ingredient.name}
                 </p>
