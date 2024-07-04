@@ -70,7 +70,7 @@ const RecipeProfile = () => {
         <h1>{recipe.title}</h1>
 
         <RecipeProfileHeaderButton
-          id={id}
+          recipe={recipe}
           setOpenDeleteRecipeModal={setOpenDeleteRecipeModal}
         />
       </header>

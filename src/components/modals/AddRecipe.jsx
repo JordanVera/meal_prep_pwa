@@ -40,11 +40,13 @@ export default function AddRecipe() {
   const [steps, setSteps] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [addingNewStep, setAddingNewStep] = useState(false);
+  const [recipeId, setRecipeId] = useState(0);
 
   useEffect(() => {
     console.log('CURRENT RECIPE BRU');
     console.log(currentRecipe);
 
+    setRecipeId(currentRecipe.id || 0);
     setTitle(currentRecipe.title || '');
     setServings(currentRecipe.servings || '');
     setCookTime(currentRecipe.readyInMinutes || '');
@@ -64,6 +66,11 @@ export default function AddRecipe() {
   useEffect(() => {
     console.log({ ingredients });
   }, [ingredients]);
+
+  useEffect(() => {
+    console.log('RECIPE ID: ');
+    console.log(recipeId);
+  }, [recipeId]);
 
   const handleSaveRecipe = async () => {
     setLoading(true);

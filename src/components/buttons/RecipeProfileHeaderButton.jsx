@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { ChevronDown, Plus } from 'lucide-react'; // Assuming you're using Lucide for icons
 import { useUser } from '@/providers/UserContext';
 
-const AddRecipeButton = ({ id, setOpenDeleteRecipeModal }) => {
+const AddRecipeButton = ({ recipe, setOpenDeleteRecipeModal }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const { handleOpenAddRecipeModalFull } = useUser();
+  const { handleOpenAddRecipeModalFull, setCurrentRecipe } = useUser();
 
   return (
     <div className="relative inline-block">
@@ -20,7 +20,10 @@ const AddRecipeButton = ({ id, setOpenDeleteRecipeModal }) => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 shadow-lg rounded-md z-50">
           <button
-            onClick={handleOpenAddRecipeModalFull}
+            onClick={() => {
+              setCurrentRecipe(recipe);
+              handleOpenAddRecipeModalFull();
+            }}
             className="block px-4 py-2 text-sm text-white hover:bg-zinc-800 w-full text-left"
           >
             Edit Recipe
