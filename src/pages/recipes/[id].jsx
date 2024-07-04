@@ -142,10 +142,13 @@ const RecipeProfile = () => {
           </div>
         </section>
 
-        <div className="bg-zinc-700 text-gray-400 rounded-xl py-2 w-full flex justify-center items-center gap-2">
-          <Users className="h-4 w-4 text-gray-400" />
-          {recipe.servings}
-        </div>
+        <section>
+          <h2 className="text-white font-bold text-sm mb-2">Servings</h2>
+          <div className="bg-zinc-700 text-gray-400 rounded-xl py-2 w-full flex justify-center items-center gap-2">
+            <Users className="h-4 w-4 text-gray-400" />
+            {recipe.servings}
+          </div>
+        </section>
 
         <section>
           <div className="flex justify-between items-center">
