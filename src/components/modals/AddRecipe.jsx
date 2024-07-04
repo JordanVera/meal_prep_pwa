@@ -172,6 +172,10 @@ export default function AddRecipe() {
             </label>
 
             <section>
+              <h2 className="text-xs mb-1">Ingredients</h2>
+            </section>
+
+            <section>
               <h2 className="text-xs mb-1">Steps</h2>
               <div className="bg-zinc-800 rounded-md">
                 <TransitionGroup>
