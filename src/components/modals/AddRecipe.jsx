@@ -38,6 +38,7 @@ export default function AddRecipe() {
     currentRecipe.instructions || ''
   );
   const [steps, setSteps] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [addingNewStep, setAddingNewStep] = useState(false);
 
   useEffect(() => {
@@ -47,17 +48,22 @@ export default function AddRecipe() {
     setTitle(currentRecipe.title || '');
     setServings(currentRecipe.servings || '');
     setCookTime(currentRecipe.readyInMinutes || '');
-    setInstructions(currentRecipe.instructions || '');
     setSteps(extractSteps(currentRecipe.instructions || ''));
-    // setCalories('');
+    setIngredients(currentRecipe.extendedIngredients || []);
+    setInstructions(currentRecipe.summary || '');
   }, [currentRecipe]);
 
   useEffect(() => {
     console.log({ instructions });
   }, [instructions]);
+
   useEffect(() => {
     console.log({ steps });
   }, [steps]);
+
+  useEffect(() => {
+    console.log({ ingredients });
+  }, [ingredients]);
 
   const handleSaveRecipe = async () => {
     setLoading(true);
@@ -72,6 +78,7 @@ export default function AddRecipe() {
         sourceUrl: currentRecipe.sourceUrl,
         sourceName: currentRecipe.sourceName,
         steps,
+        ingredients,
       });
 
       console.log('Saved recipe:', response.data);
@@ -97,10 +104,6 @@ export default function AddRecipe() {
 
     return steps;
   };
-
-  useEffect(() => {
-    console.log({ steps });
-  }, [steps]);
 
   return (
     <Modal
@@ -173,6 +176,43 @@ export default function AddRecipe() {
 
             <section>
               <h2 className="text-xs mb-1">Ingredients</h2>
+
+              <div className="bg-zinc-800 rounded-md">
+                <TransitionGroup>
+                  {ingredients.map((ingredient, index) => (
+                    <Collapse key={index} in={true}>
+                      <div className="border-b border-gray-600 p-3 flex items-center gap-5">
+                        <button
+                          className="rounded-full bg-red-600"
+                          onClick={() => {
+                            setIngredients((currentIngredients) =>
+                              currentIngredients.filter((_, i) => i !== index)
+                            );
+                          }}
+                        >
+                          <Minus className="h-4 w-4" />
+                        </button>{' '}
+                        <p className="text-xs">{ingredient.originalName}</p>
+                      </div>
+                    </Collapse>
+                  ))}
+                </TransitionGroup>
+
+                <div className="flex gap-3 items-center p-3">
+                  <button
+                    onClick={() => {
+                      setSteps((prev) => [...prev, '']);
+                      setAddingNewStep(true);
+                    }}
+                    className="bg-gradient-to-br from-blue-500 to-purple-700 w-full rounded-md py-2 text-xs flex items-center justify-center gap-1.5"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Add Ingredient
+                  </button>
+
+                  <MoreHorizIcon className="h-6 w-6" />
+                </div>
+              </div>
             </section>
 
             <section>

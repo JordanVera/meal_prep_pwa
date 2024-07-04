@@ -25,6 +25,7 @@ class UserService {
       console.log(error);
     }
   }
+
   async getRecipeById(recipeId) {
     try {
       const response = await fetch(

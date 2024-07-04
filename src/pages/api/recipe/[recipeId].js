@@ -32,6 +32,7 @@ async function getRecipeById(req, res, session) {
       },
       include: {
         Step: true,
+        Ingredient: true,
       },
     });
     return res.status(200).json({ recipe });

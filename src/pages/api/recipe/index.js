@@ -1,15 +1,21 @@
-// pages/api/save-recipe.js
 import { PrismaClient } from '@prisma/client';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
 
+// pages/api/save-recipe.js
+
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  switch (req.method) {
+    case 'POST':
+      return handlePostRequest(req, res);
+    default:
+      return res.status(405).json({ error: 'Method not allowed' });
   }
+}
 
+async function handlePostRequest(req, res) {
   const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
@@ -26,7 +32,11 @@ export default async function handler(req, res) {
     sourceUrl,
     sourceName,
     steps,
+    ingredients,
   } = req.body;
+
+  console.log('INGREDIENTS:');
+  console.log(ingredients);
 
   try {
     const recipe = await prisma.recipe.create({
@@ -52,6 +62,21 @@ export default async function handler(req, res) {
           step: index + 1,
           recipeId: recipe.id,
           content: step,
+        },
+      });
+    });
+
+    ingredients.map(async (ingredient, index) => {
+      await prisma.ingredient.create({
+        data: {
+          recipeId: recipe.id,
+          name: ingredient.originalName,
+          amount_us: ingredient.measures.us.amount,
+          amount_metric: ingredient.measures.metric.amount,
+          unitShort_us: ingredient.measures.us.unitShort,
+          unitShort_metric: ingredient.measures.metric.unitShort,
+          unitLong_us: ingredient.measures.us.unitLong,
+          unitLong_metric: ingredient.measures.metric.unitLong,
         },
       });
     });
