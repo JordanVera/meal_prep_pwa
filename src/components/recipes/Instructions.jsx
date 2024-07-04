@@ -5,7 +5,7 @@ const Instructions = ({ recipe }) => {
 
       <div className="flex flex-col gap-5">
         {recipe?.Step?.sort((x, y) => x.step - y.step).map((step) => (
-          <div className="flex gap-3.5 bg-zinc-700 rounded-xl p-3">
+          <div className="bg-gradient-to-b from-zinc-700 to-zinc-800 flex gap-3.5 rounded-xl p-3">
             <div>
               <p className="rounded-full bg-orange-500 bg-opacity-60 h-6 w-6 flex items-center justify-center text-xs">
                 {step.step}

@@ -122,8 +122,8 @@ const RecipeProfile = () => {
 
         <section>
           <h2 className="text-white font-bold text-sm mb-2">Servings</h2>
-          <div className="bg-zinc-700 text-gray-400 rounded-xl py-2 w-full flex justify-center items-center gap-2">
-            <Users className="h-4 w-4 text-gray-400" />
+          <div className="bg-gradient-to-b from-zinc-700 to-zinc-800 text-white rounded-xl py-2 w-full flex justify-center items-center gap-2">
+            <Users className="h-4 w-4 text-white" />
             {recipe.servings}
           </div>
         </section>

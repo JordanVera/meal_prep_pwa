@@ -38,7 +38,7 @@ const Ingredients = ({ measurementSystem, setMeasurementSystem, recipe }) => {
         style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}
       >
         {recipe?.Ingredient?.map((ingredient) => (
-          <div className="bg-zinc-700 rounded-xl p-3">
+          <div className="bg-gradient-to-b from-zinc-700 to-zinc-800 rounded-xl p-3">
             <p className="text-xs">
               <span>
                 {measurementSystem === 'us'
