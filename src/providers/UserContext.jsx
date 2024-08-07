@@ -17,6 +17,11 @@ export const UserProvider = ({ children }) => {
   const handleOpenAddRecipeModalFull = () =>
     setOpenAddRecipeModalFull((prev) => !prev);
 
+  const [openGenerateMealPlanModal, setOpenGenerateMealPlanModal] =
+    useState(false);
+  const handleOpenGenerateMealPlanModal = () =>
+    setOpenGenerateMealPlanModal((prev) => !prev);
+
   const [currentRecipe, setCurrentRecipe] = useState({});
   const [user, setUser] = useState(null);
   const { data: session, status } = useSession();
@@ -64,6 +69,9 @@ export const UserProvider = ({ children }) => {
         fetchCurrentlyLoggedInUser, // Export this function
         handleLogout,
         isLoadingUser,
+        handleOpenGenerateMealPlanModal,
+        openGenerateMealPlanModal,
+        setOpenGenerateMealPlanModal,
       }}
     >
       {children}
