@@ -16,11 +16,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <UserProvider>
-        <div className="flex h-screen bg-zinc-900">
+        <div className="flex h-screen">
           <div className="w-[250px]">
             <Sidebar />
           </div>
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 overflow-auto bg-zinc-900">
             <Component {...pageProps} />
             <AddRecipe />
             <AddRecipe_FromWebsite />

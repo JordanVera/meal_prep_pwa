@@ -1,4 +1,11 @@
+import WorkoutPlan from '@/components/WorkoutPlan';
+
 const discover = () => {
-  return <div>discover</div>;
+  return (
+    <div>
+      discover...
+      <WorkoutPlan />
+    </div>
+  );
 };
 export default discover;

@@ -9,6 +9,7 @@ const UserContext = createContext();
 // Provider Component
 export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [openAddRecipeModal, setOpenAddRecipeModal] = useState(false);
   const handleOpenAddRecipeModal = () => setOpenAddRecipeModal((prev) => !prev);
 
@@ -25,6 +26,7 @@ export const UserProvider = ({ children }) => {
   }, [session, status]);
 
   const fetchCurrentlyLoggedInUser = async (_) => {
+    setIsLoadingUser(true);
     try {
       if (status === 'authenticated') {
         const response = await UserService.getCurrentlyLoggedInUser();
@@ -37,6 +39,8 @@ export const UserProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoadingUser(false);
     }
   };
 
@@ -59,6 +63,7 @@ export const UserProvider = ({ children }) => {
         user,
         fetchCurrentlyLoggedInUser, // Export this function
         handleLogout,
+        isLoadingUser,
       }}
     >
       {children}

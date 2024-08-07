@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useUser } from '@/providers/UserContext';
 import axios from 'axios';
-import { BounceLoader } from 'react-spinners';
+import { MoonLoader } from 'react-spinners';
 
 const style = {
   position: 'absolute',
@@ -22,9 +20,9 @@ export default function AddRecipe_FromWebsite() {
     handleOpenAddRecipeModal,
     handleOpenAddRecipeModalFull,
     openAddRecipeModal,
-    currentRecipe,
     setCurrentRecipe,
   } = useUser();
+
   const [url, setUrl] = useState(
     'https://www.homechef.com/meals/steak-and-mushroom-white-wine-sauce-standard'
   );
@@ -59,7 +57,10 @@ export default function AddRecipe_FromWebsite() {
     >
       <Box sx={style} className="bg-zinc-900 rounded-xl w-[300px]">
         {loading ? (
-          <BounceLoader color="#ff0000" loading={loading} size={50} />
+          <div className="flex gap-2 5 items-center justify-center">
+            <MoonLoader color="#fff" size={25} />
+            <p className="text-white text-sm">Extracting Recipe...</p>
+          </div>
         ) : (
           <div className="flex flex-col gap-3">
             <h2 className="font-bold text-sm text-center">Recipe URL</h2>
@@ -67,27 +68,41 @@ export default function AddRecipe_FromWebsite() {
               Import the recipe url and we will import the ingredients
             </p>
 
-            <input
-              type="text"
-              placeholder="https://www.homechef.com/meals/maple-bbq-pecan-crusted-chicken"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              className="w-full mt-2 py-1 px-2 rounded-md bg-zinc-700 focus:outline-none border border-zinc-500 focus:border-blue-500"
-            />
+            <div className="flex flex-col gap-4">
+              <input
+                type="text"
+                placeholder="https://www.homechef.com/meals/maple-bbq-pecan-crusted-chicken"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                className="w-full mt-2 py-1 px-2 rounded-md bg-zinc-700 focus:outline-none border border-zinc-500 focus:border-blue-500"
+              />
 
-            <div className="flex flex-col gap-2">
               <button
                 onClick={handleImport}
-                className="border border-white rounded-md py-1"
+                className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
                 disabled={loading}
               >
                 Import
               </button>
               <button
                 onClick={handleOpenAddRecipeModal}
-                className="text-red-500 border border-red-500 rounded-md py-1"
+                className="bg-gradient-to-br from-red-500 to-red-900 rounded-md py-1"
               >
                 Cancel
+              </button>
+            </div>
+
+            {/* <hr className="my-2 border-b border-zinc-700" /> */}
+
+            <div className="justify-center flex">
+              <button
+                onClick={() => {
+                  handleOpenAddRecipeModal();
+                  handleOpenAddRecipeModalFull();
+                }}
+                className="capitalize text-xs text-blue-500 hover:text-white mt-3"
+              >
+                or enter manually
               </button>
             </div>
 
