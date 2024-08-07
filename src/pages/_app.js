@@ -9,6 +9,7 @@ import { SessionProvider } from 'next-auth/react';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GenerateMealPlanModal from '@/components/modals/GenerateMealPlanModal';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   useServiceWorker();
@@ -22,6 +23,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           </div>
           <div className="flex-1 overflow-auto bg-zinc-900">
             <Component {...pageProps} />
+
+            <GenerateMealPlanModal />
             <AddRecipe />
             <AddRecipe_FromWebsite />
           </div>

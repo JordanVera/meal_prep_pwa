@@ -45,6 +45,42 @@ export default function GenerateMealPlanModal() {
               Import the recipe url and we will import the ingredients
             </p>
 
+            <label className="text-xs flex flex-col gap-1">
+              Time Frame
+              <select className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700">
+                <option value="day">day</option>
+                <option value="week">week</option>
+              </select>
+            </label>
+
+            <label className="text-xs flex flex-col gap-1">
+              Calorie Target
+              <input
+                type="number"
+                name="calorieTarget"
+                id=""
+                className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                inputMode="numeric"
+                pattern="[0-9]*"
+              />
+            </label>
+
+            <label className="text-xs flex flex-col gap-1">
+              Diet
+              <select className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700">
+                <option value="day">Gluten Free</option>
+                <option value="week">Ketogenic</option>
+                <option value="week">Vegetarian</option>
+                <option value="week">Lacto-Vegetarian</option>
+                <option value="week">Ovo-Vegetarian</option>
+                <option value="week">Vegan</option>
+                <option value="week">Pescetarian</option>
+                <option value="week">Paleo</option>
+                <option value="week">Low FODMAP</option>
+                <option value="week">Whole30</option>
+              </select>
+            </label>
+
             {/* <div className="justify-center flex">
               <button
                 onClick={() => {

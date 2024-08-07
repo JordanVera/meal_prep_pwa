@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ChevronDown, Plus } from 'lucide-react'; // Assuming you're using Lucide for icons
 import { useUser } from '@/providers/UserContext';
 
-const CreateMealPlanButton = () => {
+const GenerateMealPlanButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -28,7 +28,7 @@ const CreateMealPlanButton = () => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 shadow-lg rounded-md z-50">
           <button
-            onClick={openGenerateMealPlanModal}
+            onClick={handleOpenGenerateMealPlanModal}
             className="block px-4 py-2 text-sm text-white hover:bg-zinc-800 w-full text-left"
           >
             Generate Meal Plan
@@ -46,4 +46,4 @@ const CreateMealPlanButton = () => {
   );
 };
 
-export default CreateMealPlanButton;
+export default GenerateMealPlanButton;
