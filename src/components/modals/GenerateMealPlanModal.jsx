@@ -41,9 +41,6 @@ export default function GenerateMealPlanModal() {
             <h2 className="font-bold text-sm text-center">
               Generate Meal Plan
             </h2>
-            <p className="text-xs text-center">
-              Import the recipe url and we will import the ingredients
-            </p>
 
             <label className="text-xs flex flex-col gap-1">
               Time Frame
