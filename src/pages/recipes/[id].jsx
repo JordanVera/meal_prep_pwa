@@ -8,6 +8,7 @@ import { Link, Play, Send, Users } from 'lucide-react';
 import Ingredients from '@/components/recipes/Ingredients';
 import Instructions from '@/components/recipes/Instructions';
 import DeleteRecipeConfirmation from '@/components/modals/DeleteRecipeConfirmation';
+import { Skeleton } from '@mui/material';
 
 const RecipeProfile = () => {
   const { user, fetchCurrentlyLoggedInUser } = useUser();
@@ -61,7 +62,35 @@ const RecipeProfile = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800  px-5">
+          <Skeleton variant="text" width={150} height={40} />
+        </header>
+
+        <main className="p-5 flex flex-col gap-5 max-w-[600px] mx-auto">
+          <Skeleton variant="rectangular" width="100%" height={180} />
+
+          <section className="flex justify-between">
+            <Skeleton variant="rectangular" width={100} height={40} />
+            <div className="flex gap-3">
+              <Skeleton variant="circular" width={40} height={40} />
+              <Skeleton variant="circular" width={40} height={40} />
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-white font-bold text-sm mb-2">
+              <Skeleton width={80} />
+            </h2>
+            <Skeleton variant="rectangular" width="100%" height={40} />
+          </section>
+
+          <Skeleton variant="rectangular" width="100%" height={100} />
+          <Skeleton variant="rectangular" width="100%" height={200} />
+        </main>
+      </div>
+    );
   }
 
   return (

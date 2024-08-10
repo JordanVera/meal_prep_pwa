@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useUser } from '@/providers/UserContext';
@@ -22,6 +22,16 @@ export default function GenerateMealPlanModal() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const [calorieTarget, setCalorieTarget] = useState(1500);
+  const [diet, setDiet] = useState('Gluten Free');
+  const [timeFrame, setTimeFrame] = useState('day');
+
+  useEffect(() => {
+    console.log('calorieTarget: ', calorieTarget);
+    console.log('diet: ', diet);
+    console.log('timeFrame: ', timeFrame);
+  }, [calorieTarget, diet, timeFrame]);
+
   return (
     <Modal
       open={openGenerateMealPlanModal}
@@ -44,7 +54,10 @@ export default function GenerateMealPlanModal() {
 
             <label className="text-xs flex flex-col gap-1">
               Time Frame
-              <select className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700">
+              <select
+                className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                onChange={(e) => setTimeFrame(e.target.value)}
+              >
                 <option value="day">day</option>
                 <option value="week">week</option>
               </select>
@@ -53,6 +66,8 @@ export default function GenerateMealPlanModal() {
             <label className="text-xs flex flex-col gap-1">
               Calorie Target
               <input
+                onChange={(e) => setCalorieTarget(e.target.value)}
+                defaultValue={calorieTarget}
                 type="number"
                 name="calorieTarget"
                 id=""
@@ -64,17 +79,22 @@ export default function GenerateMealPlanModal() {
 
             <label className="text-xs flex flex-col gap-1">
               Diet
-              <select className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700">
-                <option value="day">Gluten Free</option>
-                <option value="week">Ketogenic</option>
-                <option value="week">Vegetarian</option>
-                <option value="week">Lacto-Vegetarian</option>
-                <option value="week">Ovo-Vegetarian</option>
-                <option value="week">Vegan</option>
-                <option value="week">Pescetarian</option>
-                <option value="week">Paleo</option>
-                <option value="week">Low FODMAP</option>
-                <option value="week">Whole30</option>
+              <select
+                className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                onChange={(e) => {
+                  setDiet(e.target.value);
+                }}
+              >
+                <option value="Gluten Free">Gluten Free</option>
+                <option value="Ketogenic">Ketogenic</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Lacto-Vegetarian">Lacto-Vegetarian</option>
+                <option value="Ovo-Vegetarian">Ovo-Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Pescetarian">Pescetarian</option>
+                <option value="Paleo">Paleo</option>
+                <option value="Low FODMAP">Low FODMAP</option>
+                <option value="Whole30">Whole30</option>
               </select>
             </label>
 
