@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import { useUser } from '@/providers/UserContext';
 import axios from 'axios';
 import { MoonLoader } from 'react-spinners';
+import SpoonacularService from '@/services/SpoonacularService';
 
 const style = {
   position: 'absolute',
@@ -32,6 +33,23 @@ export default function GenerateMealPlanModal() {
     console.log('timeFrame: ', timeFrame);
   }, [calorieTarget, diet, timeFrame]);
 
+  const handleGenerateMealPlan = async () => {
+    setLoading(true);
+    try {
+      const mealPlan = await SpoonacularService.generateMealPlan(
+        calorieTarget,
+        diet,
+        timeFrame
+      );
+
+      console.log({ mealPlan });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Modal
       open={openGenerateMealPlanModal}
@@ -44,7 +62,7 @@ export default function GenerateMealPlanModal() {
         {loading ? (
           <div className="flex gap-2 5 items-center justify-center">
             <MoonLoader color="#fff" size={25} />
-            <p className="text-white text-sm">Extracting Recipe...</p>
+            <p className="text-white text-sm">Generating Meal Plan...</p>
           </div>
         ) : (
           <div className="flex flex-col gap-3">
@@ -98,17 +116,15 @@ export default function GenerateMealPlanModal() {
               </select>
             </label>
 
-            {/* <div className="justify-center flex">
+            <div className="justify-center flex">
               <button
-                onClick={() => {
-                  handleOpenAddRecipeModal();
-                  handleOpenAddRecipeModalFull();
-                }}
-                className="capitalize text-xs text-blue-500 hover:text-white mt-3"
+                onClick={handleGenerateMealPlan}
+                className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1 w-full mt-3"
+                disabled={loading}
               >
-                or enter manually
+                Generate Meal Plan
               </button>
-            </div> */}
+            </div>
 
             {error && (
               <p className="text-red-500 text-xs text-center mt-2">{error}</p>

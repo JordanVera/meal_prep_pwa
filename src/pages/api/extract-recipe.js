@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const response = await axios.get(
       `https://api.spoonacular.com/recipes/extract?url=${encodeURIComponent(
         url
-      )}&apiKey=${process.env.SPOONACULAR_API_KEY}`
+      )}&apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`
     );
 
     if (response.data) {
