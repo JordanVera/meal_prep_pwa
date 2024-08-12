@@ -42,7 +42,7 @@ export default function GenerateMealPlanModal() {
         timeFrame
       );
 
-      console.log({ mealPlan });
+      console.log(mealPlan);
     } catch (error) {
       console.log(error);
     } finally {

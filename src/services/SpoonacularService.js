@@ -6,7 +6,7 @@ class SpoonacularService {
     this.apiKey = apiKey;
   }
 
-  async generateMealPlan({ calorieTarget, diet, timeFrame }) {
+  async generateMealPlan(calorieTarget, diet, timeFrame) {
     try {
       const response = await axios.get(`${this.apiUrl}/mealplanner/generate`, {
         params: {
