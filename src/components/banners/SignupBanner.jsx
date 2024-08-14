@@ -1,5 +1,7 @@
 import { useUser } from '@/providers/UserContext';
 import Link from 'next/link';
+// import { X } from 'lucide-solid';
+import {Close}
 
 const SignupBanner = () => {
   const { user } = useUser();
@@ -18,6 +20,10 @@ const SignupBanner = () => {
       >
         Signup
       </Link>
+{/* 
+      <button>
+        <X />
+      </button> */}
     </header>
   );
 };
