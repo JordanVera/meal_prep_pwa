@@ -20,9 +20,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <SessionProvider session={session}>
       <UserProvider>
         <div className="flex h-screen relative">
-          <div className="w-[250px]">
-            <Sidebar />
-          </div>
+          <Sidebar />
+
           <div className="flex-1 overflow-auto bg-zinc-900">
             <Component {...pageProps} />
 

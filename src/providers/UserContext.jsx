@@ -54,6 +54,8 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
+  const [isCollapsed, setIsCollapsed] = useState(false); // State to handle collapse
+
   return (
     <UserContext.Provider
       value={{
@@ -72,6 +74,8 @@ export const UserProvider = ({ children }) => {
         handleOpenGenerateMealPlanModal,
         openGenerateMealPlanModal,
         setOpenGenerateMealPlanModal,
+        isCollapsed,
+        setIsCollapsed,
       }}
     >
       {children}
