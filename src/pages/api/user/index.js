@@ -31,7 +31,7 @@ async function getCurrentlyLoggedInUser(req, res, session) {
       include: {
         recipes: {
           include: {
-          Stepinde: true,
+            Step: true,
           },
         },
       },

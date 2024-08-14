@@ -16,8 +16,6 @@ import SignupBanner from '@/components/banners/SignupBanner';
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   useServiceWorker();
 
-  // const { user } = useUser();
-
   return (
     <SessionProvider session={session}>
       <UserProvider>
