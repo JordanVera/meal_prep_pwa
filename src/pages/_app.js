@@ -10,14 +10,18 @@ import { SessionProvider } from 'next-auth/react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GenerateMealPlanModal from '@/components/modals/GenerateMealPlanModal';
+import { useUser } from '@/providers/UserContext';
+import SignupBanner from '@/components/banners/SignupBanner';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   useServiceWorker();
 
+  // const { user } = useUser();
+
   return (
     <SessionProvider session={session}>
       <UserProvider>
-        <div className="flex h-screen">
+        <div className="flex h-screen relative">
           <div className="w-[250px]">
             <Sidebar />
           </div>
@@ -29,6 +33,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             <AddRecipe_FromWebsite />
           </div>
         </div>
+        <SignupBanner />
+
         <ToastContainer />
       </UserProvider>
     </SessionProvider>

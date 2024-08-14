@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import GenerateMealPlanButton from '@/components/buttons/GenerateMealPlanButton';
 import { ChevronDown, Plus, Ellipsis } from 'lucide-react';
-import { IconButton } from '@mui/material';
+import { IconButton } from '@mui/material'; 
 
 const mealPlan = () => {
   const getDaysOfWeek = () => {

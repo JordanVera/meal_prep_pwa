@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
@@ -61,4 +62,8 @@ body {
   backdrop-filter: blur(13.4px);
   -webkit-backdrop-filter: blur(13.4px);
   border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.multi_gradient_bg {
+  background: linear-gradient(90deg, #beaaff 0, #ff8dff 33%, #fafa19 66%, #00c7ad);
 }
