@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useUser } from '@/providers/UserContext';
 import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
+import { Tooltip } from '@mui/material';
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -75,50 +76,60 @@ const Sidebar = () => {
               href={`/`}
               className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
             >
-              <Home className="text-orange-600 h-6 w-6" />
+              <Tooltip title="Home" placement="right" arrow>
+                <Home className="text-orange-600 h-6 w-6" />
+              </Tooltip>
               {!isCollapsed && 'Home'}
             </Link>
             <Link
               href={`/mealPlan`}
               className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
             >
-              <Image
-                height={10}
-                width={26}
-                src={'/icons/mealPlan.png'}
-                alt="logo"
-              />
+              <Tooltip title="Meal Plan" placement="right" arrow>
+                <Image
+                  height={10}
+                  width={26}
+                  src={'/icons/mealPlan.png'}
+                  alt="logo"
+                />
+              </Tooltip>
               {!isCollapsed && 'Meal Plan'}
             </Link>
             <Link
               href={`/recipes`}
               className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
             >
-              <Image
-                height={10}
-                width={26}
-                src={'/icons/recipes.png'}
-                alt="logo"
-              />
+              <Tooltip title="Recipes" placement="right" arrow>
+                <Image
+                  height={10}
+                  width={26}
+                  src={'/icons/recipes.png'}
+                  alt="logo"
+                />
+              </Tooltip>
               {!isCollapsed && 'Recipes'}
             </Link>
             <Link
               href={`/groceries`}
               className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
             >
-              <Image
-                height={10}
-                width={26}
-                src={'/icons/groceries.png'}
-                alt="logo"
-              />
+              <Tooltip title="Groceries" placement="right" arrow>
+                <Image
+                  height={10}
+                  width={26}
+                  src={'/icons/groceries.png'}
+                  alt="logo"
+                />
+              </Tooltip>
               {!isCollapsed && 'Groceries'}
             </Link>
             <Link
               href={`/discover`}
               className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
             >
-              <Brain className="text-purple-600 h-6 w-6" />
+              <Tooltip title="Discover" placement="right" arrow>
+                <Brain className="text-purple-600 h-6 w-6" />
+              </Tooltip>
               {!isCollapsed && 'Discover'}
             </Link>
           </div>
