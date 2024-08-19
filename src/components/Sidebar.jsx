@@ -25,21 +25,15 @@ const Sidebar = () => {
 
   return (
     <motion.div
-      className={`${isCollapsed ? 'w-16' : 'w-[250px]'}`}
+      className={`bg-zinc-800 min-h-screen p-3 border-r border-zinc-600 ${
+        isCollapsed ? 'w-16' : 'w-[250px]'
+      }`}
       initial={{ width: 250 }}
       animate={{ width: isCollapsed ? 64 : 250 }}
       transition={{ duration: 0.3 }}
     >
-      <motion.aside
-        className={`bg-zinc-800 min-h-screen p-3 border-r border-zinc-600 fixed top-0 ${
-          isCollapsed ? 'w-16' : 'w-[250px]'
-        } `}
-        initial={{ width: 250 }}
-        animate={{ width: isCollapsed ? 64 : 250 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="flex justify-between items-center mb-5">
-          {/* {user && (
+      <div className="flex justify-between items-center mb-5">
+        {/* {user && (
             <button
               onClick={() => {
                 signOut({ callbackUrl: '/?signedOut=true' });
@@ -49,15 +43,15 @@ const Sidebar = () => {
               Signout
             </button>
           )} */}
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="text-white bg-zinc-700 p-2 rounded"
-          >
-            <MenuIcon />
-          </button>
-        </div>
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="text-white bg-zinc-700 p-2 rounded"
+        >
+          <MenuIcon />
+        </button>
+      </div>
 
-        {/* {!isCollapsed && (
+      {/* {!isCollapsed && (
           <div className="relative">
             <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-zinc-600 h-5 w-5" />
             <input
@@ -70,71 +64,70 @@ const Sidebar = () => {
           </div>
         )} */}
 
-        <div className="flex flex-col mt-5">
-          <div className="flex flex-col mt-2 space-y-2">
-            <Link
-              href={`/`}
-              className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
-            >
-              <Tooltip title="Home" placement="right" arrow>
-                <Home className="text-orange-600 h-6 w-6" />
-              </Tooltip>
-              {!isCollapsed && 'Home'}
-            </Link>
-            <Link
-              href={`/mealPlan`}
-              className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
-            >
-              <Tooltip title="Meal Plan" placement="right" arrow>
-                <Image
-                  height={10}
-                  width={26}
-                  src={'/icons/mealPlan.png'}
-                  alt="logo"
-                />
-              </Tooltip>
-              {!isCollapsed && 'Meal Plan'}
-            </Link>
-            <Link
-              href={`/recipes`}
-              className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
-            >
-              <Tooltip title="Recipes" placement="right" arrow>
-                <Image
-                  height={10}
-                  width={26}
-                  src={'/icons/recipes.png'}
-                  alt="logo"
-                />
-              </Tooltip>
-              {!isCollapsed && 'Recipes'}
-            </Link>
-            <Link
-              href={`/groceries`}
-              className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
-            >
-              <Tooltip title="Groceries" placement="right" arrow>
-                <Image
-                  height={10}
-                  width={26}
-                  src={'/icons/groceries.png'}
-                  alt="logo"
-                />
-              </Tooltip>
-              {!isCollapsed && 'Groceries'}
-            </Link>
-            <Link
-              href={`/discover`}
-              className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
-            >
-              <Tooltip title="Discover" placement="right" arrow>
-                <Brain className="text-purple-600 h-6 w-6" />
-              </Tooltip>
-              {!isCollapsed && 'Discover'}
-            </Link>
-          </div>
+      <div className="flex flex-col mt-5">
+        <div className="flex flex-col mt-2 space-y-2">
+          <Link
+            href={`/`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          >
+            <Tooltip title="Home" placement="right" arrow>
+              <Home className="text-orange-600 h-6 w-6" />
+            </Tooltip>
+            {!isCollapsed && 'Home'}
+          </Link>
+          <Link
+            href={`/mealPlan`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          >
+            <Tooltip title="Meal Plan" placement="right" arrow>
+              <Image
+                height={10}
+                width={26}
+                src={'/icons/mealPlan.png'}
+                alt="logo"
+              />
+            </Tooltip>
+            {!isCollapsed && 'Meal Plan'}
+          </Link>
+          <Link
+            href={`/recipes`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          >
+            <Tooltip title="Recipes" placement="right" arrow>
+              <Image
+                height={10}
+                width={26}
+                src={'/icons/recipes.png'}
+                alt="logo"
+              />
+            </Tooltip>
+            {!isCollapsed && 'Recipes'}
+          </Link>
+          <Link
+            href={`/groceries`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          >
+            <Tooltip title="Groceries" placement="right" arrow>
+              <Image
+                height={10}
+                width={26}
+                src={'/icons/groceries.png'}
+                alt="logo"
+              />
+            </Tooltip>
+            {!isCollapsed && 'Groceries'}
+          </Link>
+          <Link
+            href={`/discover`}
+            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          >
+            <Tooltip title="Discover" placement="right" arrow>
+              <Brain className="text-purple-600 h-6 w-6" />
+            </Tooltip>
+            {!isCollapsed && 'Discover'}
+          </Link>
         </div>
-      </motion.aside>
+      </div>
     </motion.div>
   );
 };
