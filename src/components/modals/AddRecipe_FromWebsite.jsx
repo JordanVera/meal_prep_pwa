@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import { useUser } from '@/providers/UserContext';
 import axios from 'axios';
 import { MoonLoader } from 'react-spinners';
+import { showErrorToast } from '@/utils/toasts';
 
 const style = {
   position: 'absolute',
@@ -21,6 +22,7 @@ export default function AddRecipe_FromWebsite() {
     handleOpenAddRecipeModalFull,
     openAddRecipeModal,
     setCurrentRecipe,
+    user,
   } = useUser();
 
   const [url, setUrl] = useState(
@@ -32,6 +34,20 @@ export default function AddRecipe_FromWebsite() {
   const handleImport = async () => {
     setLoading(true);
     setError('');
+
+    if (!user) {
+      handleOpenAddRecipeModal();
+      showErrorToast('You must be logged in to add a recipe');
+      setLoading(false);
+      return;
+    }
+
+    if (!url) {
+      handleOpenAddRecipeModal();
+      showErrorToast('Please enter a url to extract the recipe');
+      return;
+    }
+
     try {
       const response = await axios.post('/api/extract-recipe', { url });
 

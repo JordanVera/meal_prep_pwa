@@ -105,7 +105,7 @@ const RecipeProfile = () => {
       </header>
 
       <main className="p-5 flex flex-col gap-5 max-w-[600px] mx-auto">
-        <header
+        <section
           className="flex-auto rounded-lg  h-[180px] relative"
           style={{
             backgroundImage: `url(${recipe?.image})`,
@@ -126,7 +126,7 @@ const RecipeProfile = () => {
           >
             {recipe.sourceName}
           </a>
-        </header>
+        </section>
 
         <section className="flex justify-between">
           <button className="rounded-full bg-green-500 bg-opacity-50 text-green-500 items-center justify-center px-3 py-1 flex gap-2">

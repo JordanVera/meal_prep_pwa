@@ -8,6 +8,7 @@ import { signOut } from 'next-auth/react';
 import { Tooltip } from '@mui/material';
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Sidebar = () => {
   const [searchText, setSearchText] = useState('');
@@ -32,40 +33,14 @@ const Sidebar = () => {
       animate={{ width: isCollapsed ? 64 : 250 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex justify-between items-center">
-        {/* {user && (
-            <button
-              onClick={() => {
-                signOut({ callbackUrl: '/?signedOut=true' });
-              }}
-              className="bg-black text-white px-3 py-1 rounded-md"
-            >
-              Signout
-            </button>
-          )} */}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="text-white bg-zinc-700 p-2 rounded"
-        >
-          <MenuIcon />
-        </button>
-      </div>
-
-      {/* {!isCollapsed && (
-          <div className="relative">
-            <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-zinc-600 h-5 w-5" />
-            <input
-              onChange={(e) => setSearchText(e.target.value)}
-              type="text"
-              placeholder="Search..."
-              value={searchText}
-              className="pl-9 pr-2 py-1 w-full rounded-md text-white bg-transparent border border-zinc-600 focus:outline-none"
-            />
-          </div>
-        )} */}
-
-      <div className="flex flex-col">
-        <div className="flex flex-col mt-2 space-y-2">
+      <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col space-y-2">
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="text-white bg-zinc-700 p-2 rounded size-10"
+          >
+            <MenuIcon />
+          </button>
           <Link
             href={`/`}
             className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
@@ -126,6 +101,22 @@ const Sidebar = () => {
             </Tooltip>
             {!isCollapsed && 'Discover'}
           </Link>
+        </div>
+
+        <div className="flex flex-col space-y-2">
+          {user && (
+            <button
+              onClick={() => {
+                signOut({ callbackUrl: '/?signedOut=true' });
+              }}
+              className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+            >
+              <Tooltip title="Signout" placement="right" arrow>
+                <ExitToAppIcon className="text-red-600 h-6 w-6" />
+              </Tooltip>
+              {!isCollapsed && 'Signout'}
+            </button>
+          )}
         </div>
       </div>
     </motion.div>
