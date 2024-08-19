@@ -32,7 +32,7 @@ const Sidebar = () => {
       animate={{ width: isCollapsed ? 64 : 250 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex justify-between items-center">
         {/* {user && (
             <button
               onClick={() => {
@@ -64,7 +64,7 @@ const Sidebar = () => {
           </div>
         )} */}
 
-      <div className="flex flex-col mt-5">
+      <div className="flex flex-col">
         <div className="flex flex-col mt-2 space-y-2">
           <Link
             href={`/`}
