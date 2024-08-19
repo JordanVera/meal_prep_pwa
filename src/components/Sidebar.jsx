@@ -34,7 +34,7 @@ const Sidebar = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="flex flex-col justify-between h-full">
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-1">
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="text-white bg-zinc-700 p-2 rounded size-10"
@@ -43,7 +43,7 @@ const Sidebar = () => {
           </button>
           <Link
             href={`/`}
-            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+            className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Tooltip title="Home" placement="right" arrow>
               <Home className="text-orange-600 h-6 w-6" />
@@ -52,7 +52,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href={`/mealPlan`}
-            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+            className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Tooltip title="Meal Plan" placement="right" arrow>
               <Image
@@ -66,7 +66,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href={`/recipes`}
-            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+            className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Tooltip title="Recipes" placement="right" arrow>
               <Image
@@ -80,7 +80,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href={`/groceries`}
-            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+            className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Tooltip title="Groceries" placement="right" arrow>
               <Image
@@ -94,7 +94,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href={`/discover`}
-            className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+            className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
           >
             <Tooltip title="Discover" placement="right" arrow>
               <Brain className="text-purple-600 h-6 w-6" />
@@ -109,7 +109,7 @@ const Sidebar = () => {
               onClick={() => {
                 signOut({ callbackUrl: '/?signedOut=true' });
               }}
-              className="text-white text-sm flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+              className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
             >
               <Tooltip title="Signout" placement="right" arrow>
                 <ExitToAppIcon className="text-red-600 h-6 w-6" />
