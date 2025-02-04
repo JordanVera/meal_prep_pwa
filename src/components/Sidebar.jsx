@@ -36,36 +36,22 @@ const Sidebar = () => {
       <div className="flex flex-col space-y-1">
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="text-white bg-zinc-700 p-2 rounded size-10"
+          className="p-2 text-white rounded bg-zinc-700 size-10"
         >
           <MenuIcon />
         </button>
-        <Link
+        {/* <Link
           href={`/`}
-          className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
         >
           <Tooltip title="Home" placement="right" arrow>
-            <Home className="text-orange-600 h-6 w-6" />
+            <Home className="w-6 h-6 text-orange-600" />
           </Tooltip>
           {!isCollapsed && 'Home'}
-        </Link>
-        <Link
-          href={`/mealPlan`}
-          className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
-        >
-          <Tooltip title="Meal Plan" placement="right" arrow>
-            <Image
-              height={10}
-              width={26}
-              src={'/icons/mealPlan.png'}
-              alt="logo"
-            />
-          </Tooltip>
-          {!isCollapsed && 'Meal Plan'}
-        </Link>
+        </Link> */}
         <Link
           href={`/recipes`}
-          className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
         >
           <Tooltip title="Recipes" placement="right" arrow>
             <Image
@@ -78,8 +64,22 @@ const Sidebar = () => {
           {!isCollapsed && 'Recipes'}
         </Link>
         <Link
+          href={`/mealPlan`}
+          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
+        >
+          <Tooltip title="Meal Plan" placement="right" arrow>
+            <Image
+              height={10}
+              width={26}
+              src={'/icons/mealPlan.png'}
+              alt="logo"
+            />
+          </Tooltip>
+          {!isCollapsed && 'Meal Plan'}
+        </Link>
+        <Link
           href={`/groceries`}
-          className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
         >
           <Tooltip title="Groceries" placement="right" arrow>
             <Image
@@ -93,10 +93,10 @@ const Sidebar = () => {
         </Link>
         <Link
           href={`/discover`}
-          className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
         >
           <Tooltip title="Discover" placement="right" arrow>
-            <Brain className="text-purple-600 h-6 w-6" />
+            <Brain className="w-6 h-6 text-purple-600" />
           </Tooltip>
           {!isCollapsed && 'Discover'}
         </Link>
@@ -108,10 +108,10 @@ const Sidebar = () => {
             onClick={() => {
               signOut({ callbackUrl: '/?signedOut=true' });
             }}
-            className="text-white text-xs flex gap-3 items-center justify-start hover:bg-zinc-700 rounded-lg p-2"
+            className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
           >
             <Tooltip title="Signout" placement="right" arrow>
-              <ExitToAppIcon className="text-red-600 h-6 w-6" />
+              <ExitToAppIcon className="w-6 h-6 text-red-600" />
             </Tooltip>
             {!isCollapsed && 'Signout'}
           </button>

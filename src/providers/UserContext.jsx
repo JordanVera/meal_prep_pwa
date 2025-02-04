@@ -30,14 +30,17 @@ export const UserProvider = ({ children }) => {
     fetchCurrentlyLoggedInUser();
   }, [session, status]);
 
+  useEffect(() => {
+    console.log('USER FROM PROVIDER');
+    console.log(user);
+  }, [user]);
+
   const fetchCurrentlyLoggedInUser = async (_) => {
     setIsLoadingUser(true);
     try {
       if (status === 'authenticated') {
         const response = await UserService.getCurrentlyLoggedInUser();
 
-        console.log('USER FROM PROVIDER');
-        console.log(response);
         setUser(response.user);
       } else {
         setUser(null);
