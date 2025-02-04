@@ -21,7 +21,7 @@ export default function Home() {
   }, [router.query]);
 
   return (
-    <div className="bg-zinc-900 flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-900">
       {isSignupOrLogin ? (
         <LoginForm setIsSignupOrLogin={setIsSignupOrLogin} />
       ) : (

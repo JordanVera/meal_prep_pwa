@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import GenerateMealPlanButton from '@/components/buttons/GenerateMealPlanButton';
-import { ChevronDown, Plus, Ellipsis } from 'lucide-react';
-import { IconButton } from '@mui/material'; 
+import { Plus } from 'lucide-react';
+import { IconButton } from '@mui/material';
 
-const mealPlan = () => {
+const MealPlan = () => {
   const getDaysOfWeek = () => {
     const daysOfWeek = [];
     const currentDate = new Date();
@@ -43,30 +43,30 @@ const mealPlan = () => {
   };
 
   return (
-    <div className="bg-zinc-900 text-white min-h-screen">
-      <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800 py-2 px-5">
+    <div className="min-h-screen text-white bg-zinc-900">
+      <header className="flex items-center justify-between px-5 py-2 border-b border-zinc-600 bg-zinc-800">
         <h1>Meal Plan</h1>
         <GenerateMealPlanButton />
       </header>
 
-      <main className="mx-10 my-5 flex flex-col gap-5">
+      <main className="flex flex-col gap-5 mx-10 my-5">
         {daysOfWeek.map((day, index) => (
           <div
             key={index}
-            className="rounded-lg border-dashed border-spacing-8 border-2 border-gray-500"
+            className="border-2 border-gray-500 border-dashed rounded-lg border-spacing-8"
           >
-            <header className="bg-zinc-800 px-2 rounded-lg flex items-center justify-between">
+            <header className="flex items-center justify-between px-2 rounded-lg bg-zinc-800">
               <h2 className="text-xs font-bold">
                 {day.day} <span className="text-zinc-500"> {day.date}</span>
               </h2>
 
-              <div className="flex items-center gap-1 relative">
+              <div className="relative flex items-center gap-1">
                 <IconButton onClick={() => toggleDropdown(index)}>
-                  <Plus className="h-4 w-4 text-blue-500" />
+                  <Plus className="w-4 h-4 text-blue-500" />
                 </IconButton>
 
                 {dropdowns[index] && (
-                  <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 shadow-lg rounded-md z-50">
+                  <div className="absolute right-0 z-50 w-48 mt-2 border rounded-md shadow-lg bg-zinc-900 border-zinc-800">
                     {/* Dropdown content here */}
                     <p className="p-2">Dropdown content for {day.day}</p>
                   </div>
@@ -81,4 +81,4 @@ const mealPlan = () => {
   );
 };
 
-export default mealPlan;
+export default MealPlan;

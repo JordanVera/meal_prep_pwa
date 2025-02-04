@@ -4,7 +4,7 @@ import { Delete as ClearIcon, Save as SaveIcon } from '@mui/icons-material';
 
 import { BicepsFlexed, Target, Cog } from 'lucide-react';
 
-const discover = () => {
+const Discover = () => {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [workoutPlan, setWorkoutPlan] = useState([
@@ -335,4 +335,4 @@ const discover = () => {
   );
 };
 
-export default discover;
+export default Discover;

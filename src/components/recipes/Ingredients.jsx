@@ -7,8 +7,8 @@ const Ingredients = ({ measurementSystem, setMeasurementSystem, recipe }) => {
 
   return (
     <section>
-      <div className="flex justify-between items-center">
-        <h2 className="text-white font-bold text-sm mb-2">Ingredients</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="mb-2 text-sm font-bold text-white">Ingredients</h2>
 
         <div className="flex gap-0">
           <button
@@ -34,11 +34,14 @@ const Ingredients = ({ measurementSystem, setMeasurementSystem, recipe }) => {
       </div>
 
       <div
-        className="grid grid-flow-row auto-rows-max gap-3"
+        className="grid grid-flow-row gap-3 auto-rows-max"
         style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}
       >
-        {recipe?.Ingredient?.map((ingredient) => (
-          <div className="bg-gradient-to-b from-zinc-700 to-zinc-800 rounded-xl p-3">
+        {recipe?.Ingredient?.map((ingredient, i) => (
+          <div
+            key={`${ingredient.name}-${i}`}
+            className="p-3 bg-gradient-to-b from-zinc-700 to-zinc-800 rounded-xl"
+          >
             <p className="text-xs">
               <span>
                 {measurementSystem === 'us'

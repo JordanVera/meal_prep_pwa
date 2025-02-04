@@ -1,4 +1,4 @@
-const groceries = () => {
-  return <div>groceries</div>;
+const Groceries = () => {
+  return <div>Groceries</div>;
 };
-export default groceries;
+export default Groceries;

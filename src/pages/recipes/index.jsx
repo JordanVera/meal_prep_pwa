@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Skeleton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-const recipes = () => {
+const Recipes = () => {
   const { user, isLoadingUser, handleOpenAddRecipeModal } = useUser();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const recipes = () => {
 
   if (isLoadingUser) {
     return (
-      <div className="m-5 flex flex-wrap gap-5">
+      <div className="flex flex-wrap gap-5 m-5">
         {Array.from({ length: 10 }).map((_, index) => (
           <Skeleton
             key={index}
@@ -31,7 +31,7 @@ const recipes = () => {
   if (user?.recipes?.length < 1) {
     return (
       <div>
-        <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800 py-2 px-5">
+        <header className="flex items-center justify-between px-5 py-2 border-b border-zinc-600 bg-zinc-800">
           <h1>Recipes</h1>
           <AddRecipeButton />
         </header>
@@ -49,11 +49,11 @@ const recipes = () => {
 
   return (
     <div>
-      <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800 py-2 px-5">
+      <header className="flex items-center justify-between px-5 py-2 border-b border-zinc-600 bg-zinc-800">
         <h1>Recipes</h1>
         <AddRecipeButton />
       </header>
-      <main className="m-5 flex flex-wrap gap-5">
+      <main className="flex flex-wrap gap-5 m-5">
         {user?.recipes?.map((recipe) => (
           <Link
             key={recipe.id}
@@ -66,7 +66,7 @@ const recipes = () => {
             }}
           >
             <div className="absolute inset-0 bg-black opacity-20"></div>
-            <h2 className="absolute top-1 left-1 flex items-center justify-center text-white text-sm font-bold">
+            <h2 className="absolute flex items-center justify-center text-sm font-bold text-white top-1 left-1">
               {recipe.title}
             </h2>
           </Link>
@@ -82,4 +82,4 @@ const recipes = () => {
     </div>
   );
 };
-export default recipes;
+export default Recipes;
