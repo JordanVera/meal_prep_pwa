@@ -21,12 +21,15 @@ export default function Home() {
   }, [router.query]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-900">
-      {isSignupOrLogin ? (
-        <LoginForm setIsSignupOrLogin={setIsSignupOrLogin} />
-      ) : (
-        <SignupForm setIsSignupOrLogin={setIsSignupOrLogin} />
-      )}
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-zinc-900/80 bg-[url('/photos/meal.jpg')] bg-cover bg-center">
+      <div className="absolute inset-0 bg-black/80" />
+      <div className="z-10 ">
+        {isSignupOrLogin ? (
+          <LoginForm setIsSignupOrLogin={setIsSignupOrLogin} />
+        ) : (
+          <SignupForm setIsSignupOrLogin={setIsSignupOrLogin} />
+        )}
+      </div>
     </div>
   );
 }
