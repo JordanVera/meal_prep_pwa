@@ -181,8 +181,7 @@ const discover = () => {
         {
           headers: {
             'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
-            'X-RapidAPI-Key':
-              '64011a221amshffccf812179bc65p14a35cjsna87f43357c09',
+            'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
           },
         }
       );

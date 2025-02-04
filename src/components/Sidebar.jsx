@@ -65,7 +65,7 @@ const Sidebar = () => {
         </Link>
         <Link
           href={`/mealPlan`}
-          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
+          className="flex items-center gap-3 p-2 text-xs text-white rounded-lg justify-b hover:bg-zinc-700"
         >
           <Tooltip title="Meal Plan" placement="right" arrow>
             <Image
@@ -76,6 +76,11 @@ const Sidebar = () => {
             />
           </Tooltip>
           {!isCollapsed && 'Meal Plan'}
+          {!isCollapsed && (
+            <p className="px-1 py-0.5 ml-auto text-xs text-red-600 rounded-md bg-red-600/30">
+              Coming Soon
+            </p>
+          )}
         </Link>
         <Link
           href={`/groceries`}
@@ -90,6 +95,11 @@ const Sidebar = () => {
             />
           </Tooltip>
           {!isCollapsed && 'Groceries'}
+          {!isCollapsed && (
+            <p className="px-1 py-.05 ml-auto text-xs text-red-600 rounded-md bg-red-600/30">
+              Coming Soon
+            </p>
+          )}
         </Link>
         <Link
           href={`/discover`}
@@ -99,6 +109,11 @@ const Sidebar = () => {
             <Brain className="w-6 h-6 text-purple-600" />
           </Tooltip>
           {!isCollapsed && 'Discover'}
+          {!isCollapsed && (
+            <p className="px-1 py-.05 ml-auto text-xs text-red-600 rounded-md bg-red-600/30">
+              Coming Soon
+            </p>
+          )}
         </Link>
       </div>
 
