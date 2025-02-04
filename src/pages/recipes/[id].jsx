@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import RecipeProfileHeaderButton from '@/components/buttons/RecipeProfileHeaderButton';
 import { useUser } from '@/providers/UserContext';
-import { useParams } from 'next/navigation';
 import UserService from '@/services/UserService';
 import { useRouter } from 'next/router';
 import { Link, Play, Send, Users } from 'lucide-react';
@@ -10,15 +9,15 @@ import Instructions from '@/components/recipes/Instructions';
 import DeleteRecipeConfirmation from '@/components/modals/DeleteRecipeConfirmation';
 import { Skeleton } from '@mui/material';
 
-const RecipeProfile = () => {
+const RecipeProfile = ({ initialRecipe }) => {
   const { user, fetchCurrentlyLoggedInUser } = useUser();
-  const { id } = useParams();
+  const router = useRouter();
+  const { id } = router.query;
 
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState(initialRecipe || {});
   const [loading, setLoading] = useState(false);
   const [measurementSystem, setMeasurementSystem] = useState('us');
   const [openDeleteRecipeModal, setOpenDeleteRecipeModal] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     console.log('openDeleteRecipeModal: ');
@@ -26,7 +25,9 @@ const RecipeProfile = () => {
   }, [user]);
 
   useEffect(() => {
-    fetchRecipe();
+    if (id) {
+      fetchRecipe();
+    }
   }, [id]);
 
   const fetchRecipe = async () => {
@@ -64,7 +65,7 @@ const RecipeProfile = () => {
   if (loading) {
     return (
       <div>
-        <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800  px-5">
+        <header className="flex items-center justify-between px-5 border-b border-zinc-600 bg-zinc-800">
           <Skeleton variant="text" width={150} height={40} />
         </header>
 
@@ -80,7 +81,7 @@ const RecipeProfile = () => {
           </section>
 
           <section>
-            <h2 className="text-white font-bold text-sm mb-2">
+            <h2 className="mb-2 text-sm font-bold text-white">
               <Skeleton width={80} />
             </h2>
             <Skeleton variant="rectangular" width="100%" height={40} />
@@ -95,7 +96,7 @@ const RecipeProfile = () => {
 
   return (
     <div>
-      <header className="flex items-center justify-between border-b border-zinc-600 bg-zinc-800 py-2 px-5">
+      <header className="flex items-center justify-between px-5 py-2 border-b border-zinc-600 bg-zinc-800">
         <h1>{recipe.title}</h1>
 
         <RecipeProfileHeaderButton
@@ -115,12 +116,12 @@ const RecipeProfile = () => {
           }}
         >
           <div className="absolute inset-0 bg-black opacity-20"></div>
-          <h2 className="absolute top-2 left-2 flex items-center justify-center text-white text-lg font-bold">
+          <h2 className="absolute flex items-center justify-center text-lg font-bold text-white top-2 left-2">
             {recipe.title}
           </h2>
           <a
             href={recipe.sourceUrl}
-            className="absolute bottom-2 left-2 flex items-center justify-center text-white text-sm font-bold bg-black bg-opacity-50 rounded-full px-3 py-1"
+            className="absolute flex items-center justify-center px-3 py-1 text-sm font-bold text-white bg-black bg-opacity-50 rounded-full bottom-2 left-2"
             target="_blank"
             rel="noreferrer noopener"
           >
@@ -129,8 +130,8 @@ const RecipeProfile = () => {
         </section>
 
         <section className="flex justify-between">
-          <button className="rounded-full bg-green-500 bg-opacity-50 text-green-500 items-center justify-center px-3 py-1 flex gap-2">
-            <Play className="h-5 w-5 text-green-500" />
+          <button className="flex items-center justify-center gap-2 px-3 py-1 text-green-500 bg-green-500 bg-opacity-50 rounded-full">
+            <Play className="w-5 h-5 text-green-500" />
             Start
           </button>
 
@@ -139,20 +140,20 @@ const RecipeProfile = () => {
               href={recipe.sourceUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="rounded-full bg-blue-500 bg-opacity-50 flex items-center justify-center p-3"
+              className="flex items-center justify-center p-3 bg-blue-500 bg-opacity-50 rounded-full"
             >
-              <Link className="h-5 w-5 text-blue-500" />
+              <Link className="w-5 h-5 text-blue-500" />
             </a>
-            <button className="rounded-full bg-purple-500 bg-opacity-50 flex items-center justify-center p-3">
-              <Send className="h-5 w-5 text-purple-500" />
+            <button className="flex items-center justify-center p-3 bg-purple-500 bg-opacity-50 rounded-full">
+              <Send className="w-5 h-5 text-purple-500" />
             </button>
           </div>
         </section>
 
         <section>
-          <h2 className="text-white font-bold text-sm mb-2">Servings</h2>
-          <div className="bg-gradient-to-b from-zinc-700 to-zinc-800 text-white rounded-xl py-2 w-full flex justify-center items-center gap-2">
-            <Users className="h-4 w-4 text-white" />
+          <h2 className="mb-2 text-sm font-bold text-white">Servings</h2>
+          <div className="flex items-center justify-center w-full gap-2 py-2 text-white bg-gradient-to-b from-zinc-700 to-zinc-800 rounded-xl">
+            <Users className="w-4 h-4 text-white" />
             {recipe.servings}
           </div>
         </section>
@@ -176,3 +177,22 @@ const RecipeProfile = () => {
 };
 
 export default RecipeProfile;
+
+export async function getServerSideProps({ params }) {
+  try {
+    const response = await UserService.getRecipeById(params.id);
+
+    return {
+      props: {
+        initialRecipe: response.recipe || null,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching recipe:', error);
+    return {
+      props: {
+        initialRecipe: null,
+      },
+    };
+  }
+}
