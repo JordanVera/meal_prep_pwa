@@ -39,7 +39,7 @@ const Ingredients = ({ measurementSystem, setMeasurementSystem, recipe }) => {
       >
         {recipe?.Ingredient?.map((ingredient, i) => (
           <div
-            key={`${ingredient.name}-${i}`}
+            key={`ingredient-${i}`}
             className="p-3 bg-gradient-to-b from-zinc-700 to-zinc-800 rounded-xl"
           >
             <p className="text-xs">
