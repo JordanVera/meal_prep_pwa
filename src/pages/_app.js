@@ -7,7 +7,7 @@ import { SessionProvider } from 'next-auth/react';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Layout from './_layout';
+import Layout from '../components/Layout';
 
 import SignupBanner from '@/components/banners/SignupBanner';
 
