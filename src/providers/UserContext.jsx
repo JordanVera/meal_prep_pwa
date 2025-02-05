@@ -31,8 +31,10 @@ export const UserProvider = ({ children }) => {
   }, [session, status]);
 
   useEffect(() => {
-    console.log('USER FROM PROVIDER');
-    console.log(user);
+    if (user) {
+      console.log('USER FROM PROVIDER');
+      console.log(user);
+    }
   }, [user]);
 
   const fetchCurrentlyLoggedInUser = async (_) => {

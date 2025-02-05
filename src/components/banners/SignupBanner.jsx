@@ -10,10 +10,6 @@ const SignupBanner = () => {
   const { user } = useUser();
 
   useEffect(() => {
-    console.log({ user });
-  }, [user]);
-
-  useEffect(() => {
     const bannerState = localStorage.getItem('isBannerVisible');
     if (bannerState === 'false') {
       setIsBannerVisible(false);
@@ -35,7 +31,7 @@ const SignupBanner = () => {
     >
       <h2 className="text-2xl font-bold text-black">M-M</h2>
 
-      <p className="text-black font-bold text-md">
+      <p className="font-bold text-black text-md">
         Track health progress and meals by signing up today.{' '}
         <span className="font-normal">The best fitness app out there.</span>
       </p>
@@ -43,7 +39,7 @@ const SignupBanner = () => {
       <div className="flex items-center gap-3">
         <Link
           href={'/?signup=true'}
-          className="bg-black text-white px-4 py-2 rounded-lg"
+          className="px-4 py-2 text-white bg-black rounded-lg"
         >
           Sign Up
         </Link>
