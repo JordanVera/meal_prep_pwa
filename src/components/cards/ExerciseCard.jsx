@@ -2,7 +2,7 @@ import { BicepsFlexed, Target, Cog } from 'lucide-react';
 
 const ExerciseCard = ({ exercise }) => {
   return (
-    <div className="overflow-hidden transition-shadow duration-200 rounded-lg shadow-md bg-zinc-800 hover:shadow-blue-900/50 hover:shadow-lg">
+    <div className="overflow-hidden transition-shadow duration-200 border rounded-lg shadow-md border-zinc-600 bg-zinc-800 hover:shadow-orange-900/50 hover:shadow-lg">
       <div className="flex justify-center bg-zinc-700">
         <img
           src={exercise.gifUrl}
@@ -31,7 +31,7 @@ const ExerciseCard = ({ exercise }) => {
             </div>
           </div>
 
-          <ol className="space-y-1 text-sm list-decimal list-inside text-zinc-300">
+          <ol className="space-y-2 text-sm list-decimal list-inside text-zinc-300">
             {exercise.instructions.map((instruction, idx) => (
               <li key={idx} className="text-xs">
                 {instruction.content}
