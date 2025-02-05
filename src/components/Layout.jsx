@@ -1,9 +1,9 @@
-import { useUser } from '@/providers/UserContext';
 import Sidebar from '@/components/Sidebar';
-import AddRecipe_FromWebsite from '@/components/modals/AddRecipe_FromWebsite';
+import { useUser } from '@/providers/UserContext';
 import AddRecipe from '@/components/modals/AddRecipe';
+import AddRecipe_FromWebsite from '@/components/modals/AddRecipe_FromWebsite';
 import GenerateMealPlanModal from '@/components/modals/GenerateMealPlanModal';
-import { useEffect } from 'react';
+import GenerateWorkoutPlanModal from '@/components/modals/GenerateWorkoutPlanModal';
 
 const Layout = ({ Component, pageProps }) => {
   const { user } = useUser();
@@ -18,6 +18,7 @@ const Layout = ({ Component, pageProps }) => {
         <GenerateMealPlanModal />
         <AddRecipe />
         <AddRecipe_FromWebsite />
+        <GenerateWorkoutPlanModal />
       </div>
     </div>
   );

@@ -11,7 +11,11 @@ export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [openAddRecipeModal, setOpenAddRecipeModal] = useState(false);
+  const [openGenerateWorkoutPlanModal, setOpenGenerateWorkoutPlanModal] =
+    useState(false);
   const handleOpenAddRecipeModal = () => setOpenAddRecipeModal((prev) => !prev);
+  const handleOpenGenerateWorkoutPlanModal = () =>
+    setOpenGenerateWorkoutPlanModal((prev) => !prev);
 
   const [openAddRecipeModalFull, setOpenAddRecipeModalFull] = useState(false);
   const handleOpenAddRecipeModalFull = () =>
@@ -64,23 +68,25 @@ export const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        user,
         isLoading,
+        isCollapsed,
         setIsLoading,
-        handleOpenAddRecipeModal,
+        handleLogout,
+        currentRecipe,
+        isLoadingUser,
+        setIsCollapsed,
+        setCurrentRecipe,
         openAddRecipeModal,
         openAddRecipeModalFull,
-        handleOpenAddRecipeModalFull,
-        currentRecipe,
-        setCurrentRecipe,
-        user,
-        fetchCurrentlyLoggedInUser, // Export this function
-        handleLogout,
-        isLoadingUser,
-        handleOpenGenerateMealPlanModal,
+        handleOpenAddRecipeModal,
         openGenerateMealPlanModal,
+        fetchCurrentlyLoggedInUser, // Export this function
+        handleOpenAddRecipeModalFull,
         setOpenGenerateMealPlanModal,
-        isCollapsed,
-        setIsCollapsed,
+        openGenerateWorkoutPlanModal,
+        handleOpenGenerateMealPlanModal,
+        handleOpenGenerateWorkoutPlanModal,
       }}
     >
       {children}

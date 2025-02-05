@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
-
-import { Delete as ClearIcon, Save as SaveIcon } from '@mui/icons-material';
-import useExerciseData from '@/hooks/useExerciseData';
 import ExerciseService from '@/services/ExerciseService';
 import ExerciseCard from '@/components/cards/ExerciseCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Skeleton } from '@mui/material';
-
+import { useUser } from '@/providers/UserContext';
 const Discover = () => {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [exerciseData, setExerciseData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const { handleOpenGenerateWorkoutPlanModal } = useUser();
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -95,49 +92,18 @@ const Discover = () => {
   return (
     <div>
       <header className="flex items-center justify-between px-5 py-2 border-b border-zinc-600 bg-zinc-800">
-        <h1>Exercises</h1>
+        <div className="flex items-center gap-2">
+          <h1>Exercises</h1>
+          <button
+            onClick={handleOpenGenerateWorkoutPlanModal}
+            className="p-2 text-xs text-white transition-colors duration-200 bg-blue-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-700"
+          >
+            Generate Workout Plan
+          </button>
+        </div>
         <PaginationControls />
       </header>
       <main className="p-5 mx-auto">
-        {/* <section>
-          <h2 className="mb-8 text-3xl font-bold text-white">
-            Generate Personalized Workout Plan
-          </h2>
-
-          <div className="p-6 mb-8 rounded-lg shadow-md bg-zinc-800">
-            <div className="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2">
-              <div>
-                <label className="block mb-2 text-sm font-medium text-zinc-200">
-                  Height (cm):
-                  <input
-                    type="number"
-                    value={height}
-                    onChange={(e) => setHeight(e.target.value)}
-                    className="block w-full mt-1 rounded-md shadow-sm text-zinc-200 bg-zinc-700 border-zinc-600 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </label>
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-medium text-zinc-200">
-                  Weight (kg):
-                  <input
-                    type="number"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                    className="block w-full mt-1 rounded-md shadow-sm text-zinc-200 bg-zinc-700 border-zinc-600 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </label>
-              </div>
-            </div>
-            <button
-              onClick={fetchWorkoutPlan}
-              className="w-full px-4 py-2 text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
-            >
-              Get Plan
-            </button>
-          </div>
-        </section> */}
-
         {exerciseData?.length > 0 && (
           <div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
