@@ -43,8 +43,8 @@ export default function AddRecipe() {
   const [recipeId, setRecipeId] = useState(0);
 
   useEffect(() => {
-    console.log('CURRENT RECIPE BRU');
-    console.log(currentRecipe);
+    // console.log('CURRENT RECIPE BRU');
+    // console.log(currentRecipe);
 
     setRecipeId(currentRecipe.id || 0);
     setTitle(currentRecipe.title || '');
@@ -55,22 +55,22 @@ export default function AddRecipe() {
     setInstructions(currentRecipe.summary || '');
   }, [currentRecipe]);
 
-  useEffect(() => {
-    console.log({ instructions });
-  }, [instructions]);
+  // useEffect(() => {
+  //   console.log({ instructions });
+  // }, [instructions]);
 
-  useEffect(() => {
-    console.log({ steps });
-  }, [steps]);
+  // useEffect(() => {
+  //   console.log({ steps });
+  // }, [steps]);
 
-  useEffect(() => {
-    console.log({ ingredients });
-  }, [ingredients]);
+  // useEffect(() => {
+  //   console.log({ ingredients });
+  // }, [ingredients]);
 
-  useEffect(() => {
-    console.log('RECIPE ID: ');
-    console.log(recipeId);
-  }, [recipeId]);
+  // useEffect(() => {
+  //   console.log('RECIPE ID: ');
+  //   console.log(recipeId);
+  // }, [recipeId]);
 
   const handleSaveRecipe = async () => {
     setLoading(true);
@@ -128,51 +128,51 @@ export default function AddRecipe() {
           <BounceLoader color="#ff0000" loading={loading} size={50} />
         ) : (
           <div className="flex flex-col gap-10 max-h-[90vh] ">
-            <h2 className="font-bold text-sm text-center">Add Recipe</h2>
+            <h2 className="text-sm font-bold text-center">Add Recipe</h2>
 
-            <label className="text-xs flex flex-col gap-1">
+            <label className="flex flex-col gap-1 text-xs">
               Title
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+                className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
               />
             </label>
 
             <div className="flex flex-col gap-3">
-              <label className="text-xs flex flex-col gap-1">
+              <label className="flex flex-col gap-1 text-xs">
                 Servings
                 <input
                   type="text"
                   value={servings}
                   onChange={(e) => setServings(e.target.value)}
-                  className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+                  className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
                 />
               </label>
 
-              <label className="text-xs flex flex-col gap-1">
+              <label className="flex flex-col gap-1 text-xs">
                 Calories
                 <input
                   type="text"
                   value={calories}
                   onChange={(e) => setCalories(e.target.value)}
-                  className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+                  className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
                 />
               </label>
 
-              <label className="text-xs flex flex-col gap-1">
+              <label className="flex flex-col gap-1 text-xs">
                 Cook Time
                 <input
                   type="text"
                   value={cookTime}
                   onChange={(e) => setCookTime(e.target.value)}
-                  className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+                  className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
                 />
               </label>
             </div>
 
-            <label className="text-xs flex flex-col gap-1">
+            <label className="flex flex-col gap-1 text-xs">
               Image
               {currentRecipe?.image ? (
                 <img src={currentRecipe?.image} height={200} width={200} />
@@ -182,22 +182,22 @@ export default function AddRecipe() {
             </label>
 
             <section>
-              <h2 className="text-xs mb-1">Ingredients</h2>
+              <h2 className="mb-1 text-xs">Ingredients</h2>
 
-              <div className="bg-zinc-800 rounded-md">
+              <div className="rounded-md bg-zinc-800">
                 <TransitionGroup>
                   {ingredients.map((ingredient, index) => (
                     <Collapse key={index} in={true}>
-                      <div className="border-b border-gray-600 p-3 flex items-center gap-5">
+                      <div className="flex items-center gap-5 p-3 border-b border-gray-600">
                         <button
-                          className="rounded-full bg-red-600"
+                          className="bg-red-600 rounded-full"
                           onClick={() => {
                             setIngredients((currentIngredients) =>
                               currentIngredients.filter((_, i) => i !== index)
                             );
                           }}
                         >
-                          <Minus className="h-4 w-4" />
+                          <Minus className="w-4 h-4" />
                         </button>{' '}
                         <p className="text-xs">{ingredient.originalName}</p>
                       </div>
@@ -205,7 +205,7 @@ export default function AddRecipe() {
                   ))}
                 </TransitionGroup>
 
-                <div className="flex gap-3 items-center p-3">
+                <div className="flex items-center gap-3 p-3">
                   <button
                     onClick={() => {
                       setSteps((prev) => [...prev, '']);
@@ -213,31 +213,31 @@ export default function AddRecipe() {
                     }}
                     className="bg-gradient-to-br from-blue-500 to-purple-700 w-full rounded-md py-2 text-xs flex items-center justify-center gap-1.5"
                   >
-                    <Plus className="h-4 w-4" />
+                    <Plus className="w-4 h-4" />
                     Add Ingredient
                   </button>
 
-                  <MoreHorizIcon className="h-6 w-6" />
+                  <MoreHorizIcon className="w-6 h-6" />
                 </div>
               </div>
             </section>
 
             <section>
-              <h2 className="text-xs mb-1">Steps</h2>
-              <div className="bg-zinc-800 rounded-md">
+              <h2 className="mb-1 text-xs">Steps</h2>
+              <div className="rounded-md bg-zinc-800">
                 <TransitionGroup>
                   {steps.map((step, index) => (
                     <Collapse key={index} in={true}>
-                      <div className="border-b border-gray-600 p-3 flex items-center gap-5">
+                      <div className="flex items-center gap-5 p-3 border-b border-gray-600">
                         <button
-                          className="rounded-full bg-red-600"
+                          className="bg-red-600 rounded-full"
                           onClick={() => {
                             setSteps((currentSteps) =>
                               currentSteps.filter((_, i) => i !== index)
                             );
                           }}
                         >
-                          <Minus className="h-4 w-4" />
+                          <Minus className="w-4 h-4" />
                         </button>{' '}
                         <p className="text-xs">{step}</p>
                         {addingNewStep && steps.length - 1 === index && (
@@ -246,7 +246,7 @@ export default function AddRecipe() {
                             type="text"
                             name="step"
                             id="step"
-                            className="bg-zinc-800 text-white text-xs p-2 focus:outline-none w-full flex-grow"
+                            className="flex-grow w-full p-2 text-xs text-white bg-zinc-800 focus:outline-none"
                           />
                         )}
                       </div>
@@ -254,7 +254,7 @@ export default function AddRecipe() {
                   ))}
                 </TransitionGroup>
 
-                <div className="flex gap-3 items-center p-3">
+                <div className="flex items-center gap-3 p-3">
                   <button
                     onClick={() => {
                       setSteps((prev) => [...prev, '']);
@@ -262,30 +262,30 @@ export default function AddRecipe() {
                     }}
                     className="bg-gradient-to-br from-blue-500 to-purple-700 w-full rounded-md py-2 text-xs flex items-center justify-center gap-1.5"
                   >
-                    <Plus className="h-4 w-4" />
+                    <Plus className="w-4 h-4" />
                     Add Step
                   </button>
 
-                  <MoreHorizIcon className="h-6 w-6" />
+                  <MoreHorizIcon className="w-6 h-6" />
                 </div>
               </div>
             </section>
 
-            <label className="text-xs flex flex-col gap-1">
+            <label className="flex flex-col gap-1 text-xs">
               Instructions
               <textarea
                 type="text"
                 rows="7"
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
-                className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+                className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
               />
             </label>
 
             <div className="flex flex-col gap-2">
               <button
                 onClick={handleSaveRecipe}
-                className="text-xs bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-2"
+                className="py-2 text-xs rounded-md bg-gradient-to-br from-blue-500 to-purple-700"
               >
                 Add Recipe
               </button>

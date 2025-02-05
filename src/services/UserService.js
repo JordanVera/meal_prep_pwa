@@ -1,5 +1,3 @@
-// import { toast } from 'react-toastify';
-
 class UserService {
   constructor(apiUrl) {
     this.apiUrl = apiUrl;
@@ -73,7 +71,6 @@ class UserService {
       console.log(error);
     }
   }
-xw
 }
 
 export default new UserService();

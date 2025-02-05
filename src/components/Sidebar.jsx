@@ -11,18 +11,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Sidebar = () => {
-  const [searchText, setSearchText] = useState('');
-  const { user, handleLogout, isCollapsed, setIsCollapsed } = useUser();
+  const { user, isCollapsed, setIsCollapsed } = useUser();
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
-  useEffect(() => {
-    console.log({ user });
-  }, [user]);
+  // useEffect(() => {
+  //   console.log({ user });
+  // }, [user]);
 
-  useEffect(() => {
-    console.log({ session });
-  }, [session]);
+  // useEffect(() => {
+  //   console.log({ session });
+  // }, [session]);
 
   return (
     <motion.div

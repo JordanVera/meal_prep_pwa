@@ -6,6 +6,7 @@ import { UserProvider } from '@/providers/UserContext';
 import { SessionProvider } from 'next-auth/react';
 
 import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../components/Layout';
 

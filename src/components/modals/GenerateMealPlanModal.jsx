@@ -27,11 +27,11 @@ export default function GenerateMealPlanModal() {
   const [diet, setDiet] = useState('Gluten Free');
   const [timeFrame, setTimeFrame] = useState('day');
 
-  useEffect(() => {
-    console.log('calorieTarget: ', calorieTarget);
-    console.log('diet: ', diet);
-    console.log('timeFrame: ', timeFrame);
-  }, [calorieTarget, diet, timeFrame]);
+  // useEffect(() => {
+  //   console.log('calorieTarget: ', calorieTarget);
+  //   console.log('diet: ', diet);
+  //   console.log('timeFrame: ', timeFrame);
+  // }, [calorieTarget, diet, timeFrame]);
 
   const handleGenerateMealPlan = async () => {
     setLoading(true);
@@ -42,7 +42,7 @@ export default function GenerateMealPlanModal() {
         timeFrame
       );
 
-      console.log(mealPlan);
+      // console.log(mealPlan);
     } catch (error) {
       console.log(error);
     } finally {
@@ -60,20 +60,20 @@ export default function GenerateMealPlanModal() {
     >
       <Box sx={style} className="bg-zinc-900 rounded-xl w-[300px]">
         {loading ? (
-          <div className="flex gap-2 5 items-center justify-center">
+          <div className="flex items-center justify-center gap-2 5">
             <MoonLoader color="#fff" size={25} />
-            <p className="text-white text-sm">Generating Meal Plan...</p>
+            <p className="text-sm text-white">Generating Meal Plan...</p>
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            <h2 className="font-bold text-sm text-center">
+            <h2 className="text-sm font-bold text-center">
               Generate Meal Plan
             </h2>
 
-            <label className="text-xs flex flex-col gap-1">
+            <label className="flex flex-col gap-1 text-xs">
               Time Frame
               <select
-                className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                className="p-2 text-black bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
                 onChange={(e) => setTimeFrame(e.target.value)}
               >
                 <option value="day">day</option>
@@ -81,7 +81,7 @@ export default function GenerateMealPlanModal() {
               </select>
             </label>
 
-            <label className="text-xs flex flex-col gap-1">
+            <label className="flex flex-col gap-1 text-xs">
               Calorie Target
               <input
                 onChange={(e) => setCalorieTarget(e.target.value)}
@@ -89,16 +89,16 @@ export default function GenerateMealPlanModal() {
                 type="number"
                 name="calorieTarget"
                 id=""
-                className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                className="p-2 text-black bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
                 inputMode="numeric"
                 pattern="[0-9]*"
               />
             </label>
 
-            <label className="text-xs flex flex-col gap-1">
+            <label className="flex flex-col gap-1 text-xs">
               Diet
               <select
-                className="bg-gray-200 text-black border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                className="p-2 text-black bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:border-gray-700"
                 onChange={(e) => {
                   setDiet(e.target.value);
                 }}
@@ -116,10 +116,10 @@ export default function GenerateMealPlanModal() {
               </select>
             </label>
 
-            <div className="justify-center flex">
+            <div className="flex justify-center">
               <button
                 onClick={handleGenerateMealPlan}
-                className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1 w-full mt-3"
+                className="w-full py-1 mt-3 rounded-md bg-gradient-to-br from-blue-500 to-purple-700"
                 disabled={loading}
               >
                 Generate Meal Plan
@@ -127,7 +127,7 @@ export default function GenerateMealPlanModal() {
             </div>
 
             {error && (
-              <p className="text-red-500 text-xs text-center mt-2">{error}</p>
+              <p className="mt-2 text-xs text-center text-red-500">{error}</p>
             )}
           </div>
         )}
