@@ -23,7 +23,7 @@ const Discover = () => {
       //   return a.bodyPart.localeCompare(b.bodyPart);
       // });
 
-      setExerciseData(data);
+      setExerciseData(data.exercises);
     } catch (err) {
       setError(err.message);
       console.error('Error fetching exercises:', err);
@@ -54,6 +54,10 @@ const Discover = () => {
   useEffect(() => {
     console.log({ exerciseData });
   }, [exerciseData]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen p-8 ">
@@ -165,13 +169,13 @@ const Discover = () => {
                         </div>
                       </div>
 
-                      <ul className="space-y-1 text-sm list-decimal list-inside text-zinc-300">
+                      <ol className="space-y-1 text-sm list-decimal list-inside text-zinc-300">
                         {exercise.instructions.map((instruction, idx) => (
                           <li key={idx} className="text-xs">
-                            {instruction.slice(7)}
+                            {instruction.content}
                           </li>
                         ))}
-                      </ul>
+                      </ol>
                     </div>
                   )}
                 </div>
