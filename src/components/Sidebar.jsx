@@ -29,15 +29,6 @@ const Sidebar = () => {
         >
           <MenuIcon />
         </button>
-        {/* <Link
-          href={`/`}
-          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
-        >
-          <Tooltip title="Home" placement="right" arrow>
-            <Home className="w-6 h-6 text-orange-600" />
-          </Tooltip>
-          {!isCollapsed && 'Home'}
-        </Link> */}
         <Link
           href={`/recipes`}
           className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
@@ -109,10 +100,10 @@ const Sidebar = () => {
             }}
             className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
           >
-            <Tooltip title="Signout" placement="right" arrow>
+            <Tooltip title="Sign out" placement="right" arrow>
               <ExitToAppIcon className="w-6 h-6 text-red-600" />
             </Tooltip>
-            {!isCollapsed && 'Signout'}
+            {!isCollapsed && 'Sign out'}
           </button>
         )}
       </div>
