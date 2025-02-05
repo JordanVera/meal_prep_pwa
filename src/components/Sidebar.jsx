@@ -13,16 +13,6 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 const Sidebar = () => {
   const { user, isCollapsed, setIsCollapsed } = useUser();
 
-  const { data: session } = useSession();
-
-  // useEffect(() => {
-  //   console.log({ user });
-  // }, [user]);
-
-  // useEffect(() => {
-  //   console.log({ session });
-  // }, [session]);
-
   return (
     <motion.div
       className={`bg-zinc-800 min-h-screen p-3 border-r border-zinc-600 flex flex-col justify-between h-full ${
@@ -63,6 +53,15 @@ const Sidebar = () => {
           {!isCollapsed && 'Recipes'}
         </Link>
         <Link
+          href={`/discover`}
+          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
+        >
+          <Tooltip title="Discover" placement="right" arrow>
+            <Brain className="w-6 h-6 text-purple-600" />
+          </Tooltip>
+          {!isCollapsed && 'Discover'}
+        </Link>
+        <Link
           href={`/mealPlan`}
           className="flex items-center gap-3 p-2 text-xs text-white rounded-lg justify-b hover:bg-zinc-700"
         >
@@ -94,20 +93,6 @@ const Sidebar = () => {
             />
           </Tooltip>
           {!isCollapsed && 'Groceries'}
-          {!isCollapsed && (
-            <p className="px-1 py-.05 ml-auto text-xs text-red-600 rounded-md bg-red-600/30">
-              Coming Soon
-            </p>
-          )}
-        </Link>
-        <Link
-          href={`/discover`}
-          className="flex items-center justify-start gap-3 p-2 text-xs text-white rounded-lg hover:bg-zinc-700"
-        >
-          <Tooltip title="Discover" placement="right" arrow>
-            <Brain className="w-6 h-6 text-purple-600" />
-          </Tooltip>
-          {!isCollapsed && 'Discover'}
           {!isCollapsed && (
             <p className="px-1 py-.05 ml-auto text-xs text-red-600 rounded-md bg-red-600/30">
               Coming Soon

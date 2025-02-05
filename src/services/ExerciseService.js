@@ -5,8 +5,10 @@ class ExerciseService {
     this.apiUrl = apiUrl;
   }
 
-  async getExercises() {
-    const response = await axios.get(`${this.apiUrl}/exercise`);
+  async getExercises(page = 1, limit = 10) {
+    const response = await axios.get(`${this.apiUrl}/exercise`, {
+      params: { page, limit },
+    });
 
     return response.data;
   }

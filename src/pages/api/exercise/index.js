@@ -23,14 +23,31 @@ async function getExercises(req, res, session) {
   }
 
   try {
-    const exercises = await prisma.exercise.findMany({
-      include: {
-        instructions: true,
-        secondaryMuscles: true,
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const [exercises, total] = await Promise.all([
+      prisma.exercise.findMany({
+        include: {
+          instructions: true,
+          secondaryMuscles: true,
+        },
+        skip,
+        take: limit,
+      }),
+      prisma.exercise.count(),
+    ]);
+
+    return res.status(200).json({
+      exercises,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
     });
-
-    return res.status(200).json({ exercises });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal Server Error' });
