@@ -17,23 +17,23 @@ const AddRecipeButton = () => {
     <div className="relative inline-block">
       <button
         onClick={toggleDropdown}
-        className="flex gap-1 items-center justify-center hover:bg-zinc-600 px-2 py-1 rounded-md"
+        className="flex items-center justify-center gap-1 px-2 py-1 rounded-md hover:bg-zinc-600"
       >
-        <Plus className="h-4 w-4" />
-        <ChevronDown className="h-3 w-3" /> {/* Your icon here */}
+        <Plus className="w-4 h-4 my-1" />
+        <ChevronDown className="w-3 h-3" /> {/* Your icon here */}
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 shadow-lg rounded-md z-50">
+        <div className="absolute right-0 z-50 w-48 mt-2 border rounded-md shadow-lg bg-zinc-900 border-zinc-800">
           <button
             onClick={handleOpenAddRecipeModalFull}
-            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800 w-full text-left"
+            className="block w-full px-4 py-2 text-sm text-left text-white hover:bg-zinc-800"
           >
             Add Manually
           </button>
 
           <button
             onClick={handleOpenAddRecipeModal}
-            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800 w-full text-left"
+            className="block w-full px-4 py-2 text-sm text-left text-white hover:bg-zinc-800"
           >
             From Website...
           </button>
