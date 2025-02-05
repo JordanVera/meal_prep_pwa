@@ -11,14 +11,14 @@ const Discover = () => {
   const [exerciseData, setExerciseData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [workoutPlan, setWorkoutPlan] = useState([]);
   // const { bodyParts } = useExerciseData();
 
   const fetchExercises = async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const { data } = await ExerciseService.getExercises();
+      const data = await ExerciseService.getExercises();
       // const sortedExercises = data.sort((a, b) => {
       //   return a.bodyPart.localeCompare(b.bodyPart);
       // });
@@ -58,7 +58,7 @@ const Discover = () => {
   return (
     <div className="min-h-screen p-8 ">
       <div className="mx-auto max-w-7xl">
-        {exercises.length === 0 && (
+        {exerciseData?.length === 0 && (
           <section>
             <h2 className="mb-8 text-3xl font-bold text-center text-white">
               Get Your Personalized Workout Plan
@@ -99,7 +99,7 @@ const Discover = () => {
           </section>
         )}
 
-        {exercises.length > 0 && (
+        {exerciseData?.length > 0 && (
           <div>
             <header className="flex items-center justify-between mb-6">
               <h3 className="text-2xl font-semibold text-white ">
@@ -124,7 +124,7 @@ const Discover = () => {
               </div>
             </header>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {workoutPlan.map((exercise) => (
+              {exerciseData?.map((exercise) => (
                 <div
                   key={exercise.id}
                   className="overflow-hidden transition-shadow duration-200 rounded-lg shadow-md bg-zinc-800 hover:shadow-blue-900/50 hover:shadow-lg"
@@ -165,13 +165,13 @@ const Discover = () => {
                         </div>
                       </div>
 
-                      <ol className="space-y-1 text-sm list-decimal list-inside text-zinc-300">
+                      <ul className="space-y-1 text-sm list-decimal list-inside text-zinc-300">
                         {exercise.instructions.map((instruction, idx) => (
                           <li key={idx} className="text-xs">
-                            {instruction}
+                            {instruction.slice(7)}
                           </li>
                         ))}
-                      </ol>
+                      </ul>
                     </div>
                   )}
                 </div>

@@ -5,7 +5,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextIndex", "fullTextSearch"]
+  previewFeatures = ["fullTextIndex", "fullTextSearch", "multiSchema"]
 }
 
 model User {
@@ -68,4 +68,36 @@ model Ingredient {
 
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
+}
+
+model Exercise {
+  id               String            @id
+  name             String
+  bodyPart         String
+  equipment        String
+  gifUrl           String
+  target           String
+  secondaryMuscles SecondaryMuscle[]
+  instructions     Instruction[]
+  createdAt        DateTime          @default(now()) @map("createdAt")
+  updatedAt        DateTime          @updatedAt @map("updatedAt")
+}
+
+model SecondaryMuscle {
+  id         Int      @id @default(autoincrement())
+  name       String
+  exerciseId String
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now()) @map("createdAt")
+  updatedAt  DateTime @updatedAt @map("updatedAt")
+}
+
+model Instruction {
+  id         Int      @id @default(autoincrement())
+  step       Int
+  content    String   @db.Text
+  exerciseId String
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now()) @map("createdAt")
+  updatedAt  DateTime @updatedAt @map("updatedAt")
 }
