@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     if (router.query.signedOut) {
       showSuccessToast('You have been signed out');
-      // Remove the query parameter from the URL
+
       router.replace('/', undefined, { shallow: true });
     }
 
