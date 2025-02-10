@@ -1,4 +1,3 @@
-// components/SignupForm.js
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -37,10 +36,10 @@ const SignupForm = ({ setIsSignupOrLogin }) => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 w-[300px] lg:w-[400px]"
     >
-      <label className="text-xs flex flex-col gap-1">
+      <label className="flex flex-col gap-1 text-xs">
         Email
         <input
-          className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+          className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -49,10 +48,10 @@ const SignupForm = ({ setIsSignupOrLogin }) => {
         />
       </label>
       <div className="flex gap-5">
-        <label className="text-xs flex flex-col gap-1 w-full">
+        <label className="flex flex-col w-full gap-1 text-xs">
           First Name
           <input
-            className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+            className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -60,10 +59,10 @@ const SignupForm = ({ setIsSignupOrLogin }) => {
             required
           />
         </label>
-        <label className="text-xs flex flex-col gap-1 w-full">
+        <label className="flex flex-col w-full gap-1 text-xs">
           Last Name
           <input
-            className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+            className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -72,10 +71,10 @@ const SignupForm = ({ setIsSignupOrLogin }) => {
           />
         </label>
       </div>
-      <label className="text-xs flex flex-col gap-1">
+      <label className="flex flex-col gap-1 text-xs">
         Password
         <input
-          className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+          className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -83,10 +82,10 @@ const SignupForm = ({ setIsSignupOrLogin }) => {
           required
         />
       </label>
-      <label className="text-xs flex flex-col gap-1">
+      <label className="flex flex-col gap-1 text-xs">
         Confirm Password
         <input
-          className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+          className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -96,7 +95,7 @@ const SignupForm = ({ setIsSignupOrLogin }) => {
       </label>
       {error && <p>{error}</p>}
       <button
-        className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
+        className="py-1 rounded-md bg-gradient-to-br from-blue-500 to-purple-700"
         type="submit"
       >
         Sign Up

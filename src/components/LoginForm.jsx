@@ -1,4 +1,3 @@
-// components/LoginForm.js
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -38,10 +37,10 @@ const LoginForm = ({ setIsSignupOrLogin }) => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 w-[300px] lg:w-[400px]"
     >
-      <label className="text-xs flex flex-col gap-1">
+      <label className="flex flex-col gap-1 text-xs">
         Email or Username
         <input
-          className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+          className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
           type="text"
           value={identifier}
           onChange={(e) => setIdentifier(e.target.value)}
@@ -49,10 +48,10 @@ const LoginForm = ({ setIsSignupOrLogin }) => {
           required
         />
       </label>
-      <label className="text-xs flex flex-col gap-1">
+      <label className="flex flex-col gap-1 text-xs">
         Password
         <input
-          className="w-full py-1 px-2 rounded-md bg-zinc-800 focus:outline-none border border-zinc-700 focus:border-blue-500"
+          className="w-full px-2 py-1 border rounded-md bg-zinc-800 focus:outline-none border-zinc-700 focus:border-blue-500"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -60,9 +59,9 @@ const LoginForm = ({ setIsSignupOrLogin }) => {
           required
         />
       </label>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {error && <p className="text-sm text-red-500">{error}</p>}
       <button
-        className="bg-gradient-to-br from-blue-500 to-purple-700 rounded-md py-1"
+        className="py-1 rounded-md bg-gradient-to-br from-blue-500 to-purple-700"
         type="submit"
       >
         Login
