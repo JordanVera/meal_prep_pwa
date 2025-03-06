@@ -65,7 +65,7 @@ const Sidebar = () => {
           </Tooltip>
           {!isCollapsed && 'Meal Plan'}
           {!isCollapsed && (
-            <p className="px-1 py-0.5 ml-auto text-xs text-red-600 rounded-md bg-red-600/30">
+            <p className="px-1 py-0.5 ml-auto text-xs text-red-600 rounded-md bg-red-500/20">
               Coming Soon
             </p>
           )}
@@ -84,7 +84,7 @@ const Sidebar = () => {
           </Tooltip>
           {!isCollapsed && 'Groceries'}
           {!isCollapsed && (
-            <p className="px-1 py-.05 ml-auto text-xs text-red-600 rounded-md bg-red-600/30">
+            <p className="px-1 py-.05 ml-auto text-xs text-red-600 rounded-md bg-red-500/20">
               Coming Soon
             </p>
           )}

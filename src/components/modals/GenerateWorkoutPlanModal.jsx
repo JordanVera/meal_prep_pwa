@@ -20,6 +20,8 @@ export default function AddRecipe_FromWebsite() {
   const { openGenerateWorkoutPlanModal, handleOpenGenerateWorkoutPlanModal } =
     useUser();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     height: '',
     weight: '',
@@ -30,6 +32,7 @@ export default function AddRecipe_FromWebsite() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await ExerciseService.generateWorkoutPlan(
         Number(formData.height),
@@ -41,6 +44,8 @@ export default function AddRecipe_FromWebsite() {
       console.log('Workout Plan:', response);
     } catch (error) {
       console.error('Error generating workout plan:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -139,8 +144,13 @@ export default function AddRecipe_FromWebsite() {
           <button
             type="submit"
             className="w-full px-4 py-2 text-white transition-colors bg-blue-600 rounded-md hover:bg-blue-700"
+            disabled={isLoading}
           >
-            Generate Workout Plan
+            {isLoading ? (
+              <MoonLoader color="#ffffff" size={16} />
+            ) : (
+              'Generate Workout Plan'
+            )}
           </button>
         </form>
       </Box>
