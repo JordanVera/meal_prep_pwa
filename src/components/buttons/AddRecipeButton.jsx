@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronDown, Plus } from 'lucide-react'; // Assuming you're using Lucide for icons
+import { ChevronDown, Plus, Earth } from 'lucide-react'; // Assuming you're using Lucide for icons
 import { useUser } from '@/providers/UserContext';
 
 const AddRecipeButton = () => {
@@ -26,16 +26,18 @@ const AddRecipeButton = () => {
         <div className="absolute right-0 z-50 w-48 mt-2 border rounded-md shadow-lg bg-zinc-900 border-zinc-800">
           <button
             onClick={handleOpenAddRecipeModalFull}
-            className="block w-full px-4 py-2 text-sm text-left text-white hover:bg-zinc-800"
+            className="flex items-center w-full gap-2 px-4 py-2 text-sm text-left text-white hover:bg-zinc-800"
           >
+            <Plus className="w-4 h-4 my-1" />
             Add Manually
           </button>
 
           <button
             onClick={handleOpenAddRecipeModal}
-            className="block w-full px-4 py-2 text-sm text-left text-white hover:bg-zinc-800"
+            className="flex items-center w-full gap-2 px-4 py-2 text-sm text-left text-white hover:bg-zinc-800"
           >
-            From Website...
+            <Earth className="w-4 h-4 my-1" />
+            From Website
           </button>
         </div>
       )}

@@ -122,7 +122,7 @@ export default function AddRecipe() {
     >
       <Box
         sx={style}
-        className="bg-zinc-900 rounded-xl  min-w-[450px] max-w-[600px] overflow-scroll"
+        className="bg-zinc-900 rounded-xl  min-w-[450px] max-w-[600px] max-h-[90vh]  overflow-scroll"
       >
         {loading ? (
           <BounceLoader color="#ff0000" loading={loading} size={50} />
