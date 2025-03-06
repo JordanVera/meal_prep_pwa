@@ -5,8 +5,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Skeleton } from '@mui/material';
 import { useUser } from '@/providers/UserContext';
 const Discover = () => {
-  const [height, setHeight] = useState('');
-  const [weight, setWeight] = useState('');
   const [exerciseData, setExerciseData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,13 +12,31 @@ const Discover = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [selectedBodyPart, setSelectedBodyPart] = useState(null);
+  const [bodyPartTypes, setBodyPartTypes] = useState([]);
   // const { bodyParts } = useExerciseData();
+
+  const fetchBodyPartTypes = async () => {
+    try {
+      const types = await ExerciseService.getBodyPartTypes();
+      setBodyPartTypes(types);
+    } catch (err) {
+      console.error('Error fetching body part types:', err);
+    }
+  };
 
   const fetchExercises = async (page = 1) => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await ExerciseService.getExercises(page, itemsPerPage);
+      const data = await ExerciseService.getExercises(
+        page,
+        itemsPerPage,
+        selectedBodyPart
+      );
+
+      console.log({ data });
+
       setExerciseData(data.exercises);
       setPagination(data.pagination);
     } catch (err) {
@@ -32,8 +48,12 @@ const Discover = () => {
   };
 
   useEffect(() => {
+    fetchBodyPartTypes();
+  }, []);
+
+  useEffect(() => {
     fetchExercises(currentPage);
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, selectedBodyPart]);
 
   useEffect(() => {
     console.log({ exerciseData });
@@ -46,6 +66,13 @@ const Discover = () => {
 
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(Number(event.target.value));
+    setCurrentPage(1);
+  };
+
+  const handleBodyPartChange = (event) => {
+    setSelectedBodyPart(
+      event.target.value === 'all' ? null : event.target.value
+    );
     setCurrentPage(1);
   };
 
@@ -71,6 +98,18 @@ const Discover = () => {
         >
           <ChevronRight className="w-4 h-4" />
         </button>
+        <select
+          value={selectedBodyPart || 'all'}
+          onChange={handleBodyPartChange}
+          className="px-3 py-2 text-xs text-white border rounded-md bg-zinc-800 border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="all">All Body Parts</option>
+          {bodyPartTypes.map((bodyPart) => (
+            <option key={bodyPart} value={bodyPart}>
+              {bodyPart.charAt(0).toUpperCase() + bodyPart.slice(1)}
+            </option>
+          ))}
+        </select>
         <select
           value={itemsPerPage}
           onChange={handleItemsPerPageChange}

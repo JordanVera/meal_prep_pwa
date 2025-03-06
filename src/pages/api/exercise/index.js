@@ -25,10 +25,18 @@ async function getExercises(req, res, session) {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
+    const bodyPart = req.query.bodyPart || null;
     const skip = (page - 1) * limit;
+
+    // Build the where clause for filtering
+    const where = {};
+    if (bodyPart) {
+      where.bodyPart = bodyPart;
+    }
 
     const [exercises, total] = await Promise.all([
       prisma.exercise.findMany({
+        where,
         include: {
           instructions: true,
           secondaryMuscles: true,
@@ -36,7 +44,9 @@ async function getExercises(req, res, session) {
         skip,
         take: limit,
       }),
-      prisma.exercise.count(),
+      prisma.exercise.count({
+        where,
+      }),
     ]);
 
     return res.status(200).json({

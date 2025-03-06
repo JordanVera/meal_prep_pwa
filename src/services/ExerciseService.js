@@ -5,11 +5,22 @@ class ExerciseService {
     this.apiUrl = apiUrl;
   }
 
-  async getExercises(page = 1, limit = 10) {
+  async getExercises(page = 1, limit = 10, bodyPart = null) {
     const response = await axios.get(`${this.apiUrl}/exercise`, {
-      params: { page, limit },
+      params: {
+        page,
+        limit,
+        bodyPart,
+      },
     });
 
+    return response.data;
+  }
+
+  async getBodyPartTypes(bodyPart = null) {
+    const response = await axios.get(`${this.apiUrl}/exercise/get-types`, {
+      params: { bodyPart },
+    });
     return response.data;
   }
 
